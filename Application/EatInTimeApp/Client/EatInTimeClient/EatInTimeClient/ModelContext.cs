@@ -5,9 +5,9 @@ namespace EatInTimeClient
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
 
-    public partial class Model : DbContext
+    public partial class ModelContext : DbContext
     {
-        public Model()
+        public ModelContext()
             : base("name=ModelContext")
         {
         }
