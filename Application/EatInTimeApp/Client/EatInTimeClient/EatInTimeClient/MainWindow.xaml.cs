@@ -24,5 +24,15 @@ namespace EatInTimeClient
         {
             InitializeComponent();
         }
+
+        private void SearchDishTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            SearchDishTextBox.Text = String.Empty;
+        }
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
