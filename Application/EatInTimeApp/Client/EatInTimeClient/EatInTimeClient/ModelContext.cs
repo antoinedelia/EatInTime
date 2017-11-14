@@ -4,6 +4,7 @@ namespace EatInTimeClient
     using System.Data.Entity;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
+    using EatInTimeClient.Model;
 
     public partial class ModelContext : DbContext
     {

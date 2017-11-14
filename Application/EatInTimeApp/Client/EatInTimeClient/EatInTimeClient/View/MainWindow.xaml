@@ -5,18 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EatInTimeClient"
         mc:Ignorable="d"
-        Title="MainWindow" Height="711.73" Width="1138.471">
+        Title="MainWindow" Height="711.73" Width="1138.471" ResizeMode="NoResize" >
+    <!--WindowStartupLocation="CenterScreen" WindowState="Maximized"-->
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="157*"/>
             <RowDefinition Height="524*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="208*"/>
-            <ColumnDefinition Width="93*"/>
-            <ColumnDefinition Width="216*"/>
+            <ColumnDefinition Width="455*"/>
+            <ColumnDefinition Width="204*"/>
+            <ColumnDefinition Width="94*"/>
+            <ColumnDefinition Width="379*"/>
         </Grid.ColumnDefinitions>
-        <TabControl x:Name="DishesTabControl" HorizontalAlignment="Left" Height="636" Margin="10,35,0,0" VerticalAlignment="Top" Width="848" Grid.ColumnSpan="3" Grid.RowSpan="2">
+        <TabControl x:Name="DishesTabControl" HorizontalAlignment="Left" Height="636" Margin="10,35,0,0" VerticalAlignment="Top" Width="848" Grid.ColumnSpan="4" Grid.RowSpan="2" ItemsSource="{Binding }">
             <TabItem x:Name="MenuTab" Header="Menus">
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
@@ -34,6 +36,7 @@
                         <ColumnDefinition Width="7*"/>
                         <ColumnDefinition Width="269*"/>
                     </Grid.ColumnDefinitions>
+                    <DataGrid HorizontalAlignment="Left" Height="588" Margin="10,10,0,0" VerticalAlignment="Top" Width="822" Grid.ColumnSpan="2"/>
                 </Grid>
             </TabItem>
             <TabItem x:Name="DessertTab" Header="Desserts">
@@ -63,14 +66,14 @@
         </TabControl>
         <TextBox x:Name="SearchDishTextBox" HorizontalAlignment="Left" Height="23" Margin="10,7,0,0" TextWrapping="Wrap" Text="Rechercher un plat" VerticalAlignment="Top" Width="370" GotFocus="SearchDishTextBox_GotFocus" />
         <Button x:Name="SearchButton" Grid.ColumnSpan="2" Content="Rechercher" HorizontalAlignment="Left" Margin="390,7,0,0" VerticalAlignment="Top" Width="142" Height="23" Click="SearchButton_Click"/>
-        <ListView x:Name="CommandListBox" Grid.Column="2" HorizontalAlignment="Left" Height="614" Margin="205,57,0,0" VerticalAlignment="Top" Width="257" Grid.RowSpan="2">
+        <ListView x:Name="CommandListBox" Grid.Column="3" HorizontalAlignment="Left" Height="614" Margin="111,57,0,0" VerticalAlignment="Top" Width="257" Grid.RowSpan="2">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <TextBox x:Name="InertCommandTextbox" Grid.Column="2" HorizontalAlignment="Left" Height="24" Margin="205,33,0,0" Text="Commande" VerticalAlignment="Top" Width="257" TextWrapping="Wrap" IsReadOnly="True" TextAlignment="Center"/>
+        <TextBox x:Name="InertCommandTextbox" Grid.Column="3" HorizontalAlignment="Left" Height="24" Margin="111,33,0,0" Text="Commande" VerticalAlignment="Top" Width="257" TextWrapping="Wrap" IsReadOnly="True" TextAlignment="Center"/>
 
     </Grid>
 </Window>

@@ -1,4 +1,4 @@
-namespace EatInTimeClient
+namespace EatInTimeClient.Model
 {
     using System;
     using System.Collections.Generic;

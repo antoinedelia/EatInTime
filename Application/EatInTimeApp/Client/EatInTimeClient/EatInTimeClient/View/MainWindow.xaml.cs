@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using EatInTimeClient.ViewModel;
+using EatInTimeClient.Model;
 
 namespace EatInTimeClient
 {
@@ -20,9 +22,16 @@ namespace EatInTimeClient
     /// </summary>
     public partial class MainWindow : Window
     {
+        
         public MainWindow()
         {
             InitializeComponent();
+            var vm = new EatInTimeClient.ViewModel.ViewModelMainWindow();
+            //using (var db = new ModelContext())
+            //{
+            //    var tg = db.Plat.FirstOrDefault();
+            //    Console.Write("");
+            //}
         }
 
         private void SearchDishTextBox_GotFocus(object sender, RoutedEventArgs e)
