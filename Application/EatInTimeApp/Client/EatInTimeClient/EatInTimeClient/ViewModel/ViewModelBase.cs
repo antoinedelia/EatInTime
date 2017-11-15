@@ -8,7 +8,7 @@ using System.ComponentModel;
 
 namespace EatInTimeClient.ViewModel
 {
-    class ViewModelBase : INotifyPropertyChanged
+    public class ViewModelBase : INotifyPropertyChanged
     {
         internal void RaisePropertyChanged(string property)
         {

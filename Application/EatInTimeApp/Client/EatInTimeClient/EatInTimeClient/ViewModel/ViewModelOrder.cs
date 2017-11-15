@@ -8,7 +8,7 @@ using EatInTimeClient.Model;
 
 namespace EatInTimeClient.ViewModel
 {
-    class ViewModelMainWindow : ViewModelBase
+    public class ViewModelOrder : ViewModelBase
     {
         public ObservableCollection<Plat> Dishes { get; set; }
 
@@ -30,12 +30,17 @@ namespace EatInTimeClient.ViewModel
             }
         }
 
-        public ViewModelMainWindow()
+        internal void LoadDishes()
         {
-            using(var db = new ModelContext())
+            using (var db = new ModelContext())
             {
                 Dishes = new ObservableCollection<Plat>(db.Plat);
             }
+        }
+
+        public ViewModelOrder()
+        {
+            
         }
     }
 }

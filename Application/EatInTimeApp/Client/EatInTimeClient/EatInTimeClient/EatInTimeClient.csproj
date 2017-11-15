@@ -70,8 +70,15 @@
     </Compile>
     <Compile Include="Model\Tables.cs" />
     <Compile Include="Model\Type_Plat.cs" />
+    <Compile Include="View\UserControlOrdering.xaml.cs">
+      <DependentUpon>UserControlOrdering.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\ViewModelBase.cs" />
-    <Compile Include="ViewModel\ViewModelMainWindow.cs" />
+    <Compile Include="ViewModel\ViewModelOrder.cs" />
+    <Page Include="View\UserControlOrdering.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
