@@ -1,9 +1,7 @@
-using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.Spatial;
 
 namespace EatInTimeClient.Model
 {
@@ -24,5 +22,15 @@ namespace EatInTimeClient.Model
         public virtual Type_Plat Type_Plat { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public Plat(string DishName, decimal Price)
+        {
+            this.Nom_Plat = DishName;
+            this.Prix_Plat = Price;
+        }
+
+        public Plat()
+        {
+        }
     }
 }

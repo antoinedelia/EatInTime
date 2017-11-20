@@ -14,7 +14,7 @@
             <ColumnDefinition Width="78*"/>
             <ColumnDefinition Width="303*"/>-->
         </Grid.ColumnDefinitions>
-        <views:UserControlOrdering x:Name="OrderDishesControl" Loaded="OrderDishesControl_Loaded" Margin="10,10,10,111" Width="1174"/>
+        <views:UserControlOrdering x:Name="OrderDishesControl" Margin="10,10,10,111" Width="1174"/>
         <Button Content="Appeler un serveur" HorizontalAlignment="Left" Margin="33,722,0,0" VerticalAlignment="Top" Width="221" Height="62" FontSize="24"/>
         <Button Content="Commander" HorizontalAlignment="Left" Margin="937,722,0,0" VerticalAlignment="Top" Width="221" Height="62" FontSize="24"/>
     </Grid>

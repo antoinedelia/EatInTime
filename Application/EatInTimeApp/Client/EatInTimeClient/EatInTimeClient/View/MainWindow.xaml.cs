@@ -21,7 +21,7 @@ namespace EatInTimeClient.View
         private void OrderDishesControl_Loaded(object sender, RoutedEventArgs e)
         {
             ViewModel.ViewModelOrder orderViewModel = new ViewModel.ViewModelOrder();
-            orderViewModel.LoadDishes();
+            //orderViewModel.LoadDishes();
         }
     }
 }
