@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using EatInTimeClient.Model;
 
 namespace EatInTimeClient.ViewModel
@@ -32,15 +27,15 @@ namespace EatInTimeClient.ViewModel
 
         internal void LoadDishes()
         {
-            using (var db = new ModelContext())
-            {
-                Dishes = new ObservableCollection<Plat>(db.Plat);
-            }
+            
         }
 
         public ViewModelOrder()
         {
-            
+            using (var db = new ModelContext())
+            {
+                Dishes = new ObservableCollection<Plat>(db.Plat);
+            }
         }
     }
 }
