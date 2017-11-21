@@ -15,7 +15,7 @@
                 <ColumnDefinition Width="66*"/>
                 <ColumnDefinition Width="19*"/>
             </Grid.ColumnDefinitions>
-            <TabControl x:Name="DishesTabControl" HorizontalAlignment="Left" Height="636" Margin="0,0,0,0" VerticalAlignment="Top" Width="848" Grid.Row="1" SelectedIndex="2">
+            <TabControl x:Name="DishesTabControl" HorizontalAlignment="Left" Height="636" Margin="0,0,0,0" VerticalAlignment="Top" Width="848" Grid.Row="1" >
                 <TabItem x:Name="MenuTab" Header="Menus">
                     <Grid Background="#FFE5E5E5"/>
                 </TabItem>
@@ -28,32 +28,11 @@
                     </Grid>
                 </TabItem>
                 <TabItem x:Name="PlatTab" Header="Plats">
-                    <ItemsControl Name="DishesItemsControl">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <Grid Margin="10">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition/>
-                                            <ColumnDefinition/>
-                                            <ColumnDefinition/>
-                                        </Grid.ColumnDefinitions>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition/>
-                                            <RowDefinition/>
-                                        </Grid.RowDefinitions>
-                                        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Nom_Plat}" FontSize="10"/>
-                                        <TextBox Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" Text="{Binding Prix_Plat, StringFormat=' {0} €'}" FontSize="10"/>
-                                    </Grid>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                    <!--<Grid Background="#FFE5E5E5">
-                        --><!--<Grid.ColumnDefinitions>
+                    <Grid Background="#FFE5E5E5">
+                        <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="7*"/>
                             <ColumnDefinition Width="269*"/>
-                        </Grid.ColumnDefinitions>--><!--
+                        </Grid.ColumnDefinitions>
                         <Button Content="Commander" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="110" Grid.ColumnSpan="2"/>
                         <TextBox Grid.Column="1" HorizontalAlignment="Left" Height="20" Margin="104,11,0,0" TextWrapping="Wrap" Text="Tagliatelles Carbonara" VerticalAlignment="Top" Width="285" TextDecorations="Underline" IsReadOnly="True" IsEnabled="False"/>
                         <Button Content="Plus d'informations" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top" Width="110" Grid.ColumnSpan="2"/>
@@ -69,8 +48,8 @@
                         <Button Content="Plus d'informations" HorizontalAlignment="Left" Margin="10,180,0,0" VerticalAlignment="Top" Width="110" Grid.ColumnSpan="2"/>
                         <TextBox Grid.Column="1" HorizontalAlignment="Left" Height="20" Margin="104,180,0,0" TextWrapping="Wrap" Text="Tortellinis, Poivron Vert, Feta, Basilic, Huile d'Olive, Tomates" VerticalAlignment="Top" Width="285" FontSize="10" FontStyle="Italic" IsReadOnly="True" IsEnabled="False"/>
                         <TextBox Grid.Column="1" HorizontalAlignment="Left" Height="40" Margin="612,160,0,0" TextWrapping="Wrap" Text="7€" VerticalAlignment="Top" Width="110" TextDecorations="Underline"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="24" IsReadOnly="True" IsEnabled="False"/>
-                        --><!--<DataGrid HorizontalAlignment="Left" Height="588" Margin="10,10,0,0" VerticalAlignment="Top" Width="822" Grid.ColumnSpan="1" />--><!--
-                    </Grid>-->
+                        <!--<DataGrid HorizontalAlignment="Left" Height="588" Margin="10,10,0,0" VerticalAlignment="Top" Width="822" Grid.ColumnSpan="1" />-->
+                    </Grid>
                 </TabItem>
                 <TabItem x:Name="DessertTab" Header="Desserts">
                     <Grid Background="#FFE5E5E5">
