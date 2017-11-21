@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Threading;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace EatInTimeClient.ViewModel
 {
@@ -12,7 +6,7 @@ namespace EatInTimeClient.ViewModel
     {
         internal void RaisePropertyChanged(string property)
         {
-            if(PropertyChanged != null) { PropertyChanged(this, new PropertyChangedEventArgs(property)); }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
         public event PropertyChangedEventHandler PropertyChanged;
     }

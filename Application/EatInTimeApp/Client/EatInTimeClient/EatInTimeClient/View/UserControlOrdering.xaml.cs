@@ -12,6 +12,8 @@ namespace EatInTimeClient.View
         public UserControlOrdering()
         {
             InitializeComponent();
+            ViewModel.ViewModelOrder vmorder = new ViewModel.ViewModelOrder();
+            DishesItemsControl.ItemsSource = vmorder.Dishes;
         }
 
         private void SearchDishTextBox_GotFocus(object sender, RoutedEventArgs e)

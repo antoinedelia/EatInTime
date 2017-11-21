@@ -1,14 +1,13 @@
-namespace EatInTimeClient
+namespace EatInTimeClient.DAL
 {
     using System;
     using System.Data.Entity;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
-    using EatInTimeClient.DAL;
 
-    public partial class ModelContext : DbContext
+    public partial class EatInTimeContext : DbContext
     {
-        public ModelContext()
+        public EatInTimeContext()
             : base("name=EatInTimeContext")
         {
         }
@@ -18,6 +17,7 @@ namespace EatInTimeClient
         public virtual DbSet<Emplacement> Emplacement { get; set; }
         public virtual DbSet<Ingredient> Ingredient { get; set; }
         public virtual DbSet<Plat> Plat { get; set; }
+        public virtual DbSet<Sysdiagrams> Sysdiagrams { get; set; }
         public virtual DbSet<Tables> Tables { get; set; }
         public virtual DbSet<Type_Plat> Type_Plat { get; set; }
 
@@ -32,6 +32,11 @@ namespace EatInTimeClient
                 .WithRequired(e => e.Avancement)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<Commande>()
+                .HasMany(e => e.Plat)
+                .WithMany(e => e.Commande)
+                .Map(m => m.ToTable("contient").MapLeftKey("Id_Commande").MapRightKey("Id_Plat"));
+
             modelBuilder.Entity<Emplacement>()
                 .Property(e => e.Nom_Emplacement)
                 .IsUnicode(false);
@@ -44,6 +49,11 @@ namespace EatInTimeClient
             modelBuilder.Entity<Ingredient>()
                 .Property(e => e.Nom_Ingredient)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<Ingredient>()
+                .HasMany(e => e.Plat)
+                .WithMany(e => e.Ingredient)
+                .Map(m => m.ToTable("est_compose").MapLeftKey("Id_Ingredient").MapRightKey("Id_Plat"));
 
             modelBuilder.Entity<Plat>()
                 .Property(e => e.Nom_Plat)
