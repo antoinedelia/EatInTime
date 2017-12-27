@@ -52,7 +52,7 @@ namespace EatInTimeClient.DAL
 
             modelBuilder.Entity<Ingredient>()
                 .HasMany(e => e.Plat)
-                .WithMany(e => e.Ingredient)
+                .WithMany(e => e.Ingredients)
                 .Map(m => m.ToTable("est_compose").MapLeftKey("Id_Ingredient").MapRightKey("Id_Plat"));
 
             modelBuilder.Entity<Plat>()

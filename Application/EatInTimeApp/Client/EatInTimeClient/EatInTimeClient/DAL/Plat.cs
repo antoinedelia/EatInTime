@@ -1,19 +1,18 @@
 namespace EatInTimeClient.DAL
 {
-    using System;
-    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
 
     [Table("Plat")]
-    public partial class Plat
+    public partial class Plat : INotifyPropertyChanged
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Plat()
         {
-            Commande = new HashSet<Commande>();
-            Ingredient = new HashSet<Ingredient>();
+            Commande = new ObservableCollection<Commande>();
+            Ingredients = new ObservableCollection<Ingredient>();
         }
 
         [Key]
@@ -30,9 +29,15 @@ namespace EatInTimeClient.DAL
         public virtual Type_Plat Type_Plat { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Commande> Commande { get; set; }
+        public virtual ObservableCollection<Commande> Commande { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Ingredient> Ingredient { get; set; }
+        public virtual ObservableCollection<Ingredient> Ingredients { get; set; }
+        [NotMapped]
+        public string String_Ingredients { get; set; }
+        [NotMapped]
+        public bool Is_In_Menu { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }
