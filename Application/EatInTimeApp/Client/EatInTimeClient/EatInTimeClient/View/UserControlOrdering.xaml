@@ -27,7 +27,7 @@
 
                 </TabItem>
                 <TabItem x:Name="EntreesTab" Header="Entrées">
-                    <ItemsControl Name="EntreesItemsControl" ItemsSource="{Binding Entrees}">
+                    <ItemsControl Name="EntreesItemsControl" ItemsSource="{Binding Entrees}" AlternationCount="100">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
@@ -41,7 +41,7 @@
                                             <RowDefinition/>
                                             <RowDefinition/>
                                         </Grid.RowDefinitions>
-                                        <Button Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Content="{Binding Test}" Command="{Binding AddDishToCommand}" CommandParameter="{Binding }">
+                                        <Button Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Content="Commander" Command="{Binding AddEntreeToCommand}" CommandParameter="{Binding Path=(ItemsControl.AlternationIndex),RelativeSource={RelativeSource TemplatedParent}}">
                                             <Button.DataContext>
                                                 <viewn:ViewModelOrder/>
                                             </Button.DataContext>

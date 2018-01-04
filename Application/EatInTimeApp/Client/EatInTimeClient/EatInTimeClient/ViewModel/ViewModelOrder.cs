@@ -38,16 +38,16 @@ namespace EatInTimeClient.ViewModel
                 _test = value;
             }
         }
-        private RelayCommand _addDishToCommand;
-        public RelayCommand AddDishToCommand
+        private RelayCommand _addEntreeToCommand;
+        public RelayCommand AddEntreeToCommand
         {
             get
             {
-                if (_addDishToCommand == null)
+                if (_addEntreeToCommand == null)
                 {
-                    _addDishToCommand = new RelayCommand<object>(DoAdd);
+                    _addEntreeToCommand = new RelayCommand<object>(DoAdd);
                 }
-                return _addDishToCommand;
+                return _addEntreeToCommand;
             }
         }
         private bool canExecute = true;
@@ -114,17 +114,18 @@ namespace EatInTimeClient.ViewModel
                 Entrees = new ObservableCollection<Plat>(AllDishes.Where(n => n.Type_Plat.Nom_Type_Plat == "Entrée"));
                 Desserts = new ObservableCollection<Plat>(AllDishes.Where(n => n.Type_Plat.Nom_Type_Plat == "Dessert"));
                 Drinks = new ObservableCollection<Plat>(AllDishes.Where(n => n.Type_Plat.Nom_Type_Plat == "Boisson"));
+                
             }
-            //AddDishToCommand = new RelayCommand(DoAdd);
+            Order = new ObservableCollection<Plat>();
         }
 
         private void DoAdd(object obj)
         {
-            var str = obj as string;
-           //MessageBox.Show(str);
-           //Order.Add((Plat)obj);
+            int index = (int)obj;
+            Plat plat = Entrees[index];
+            _Order.Add(plat);
         }
-
+        
         private ObservableCollection<Plat> EditIngredients(ObservableCollection<Plat> ListePlats)
         {
             foreach (Plat Plat in ListePlats)
