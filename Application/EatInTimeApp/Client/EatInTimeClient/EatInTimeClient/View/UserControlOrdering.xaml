@@ -168,10 +168,11 @@
             </TabControl>
             <TextBox x:Name="SearchDishTextBox" HorizontalAlignment="Left" Height="23" Margin="10,7,0,0" TextWrapping="Wrap" Text="Rechercher un plat" VerticalAlignment="Top" Width="370" GotFocus="SearchDishTextBox_GotFocus" />
             <Button x:Name="SearchButton" Content="Rechercher" HorizontalAlignment="Left" Margin="390,7,0,0" VerticalAlignment="Top" Width="142" Height="23" Click="SearchButton_Click"/>
-            <ListView x:Name="CommandListBox" Grid.Column="1" HorizontalAlignment="Left" Height="636" Margin="10,1,0,0" VerticalAlignment="Top" Width="230" Grid.Row="1" ItemsSource="{Binding Order}">
+            <ListView x:Name="CommandListBox" Grid.Column="1" HorizontalAlignment="Left" Height="636" Margin="10,1,0,0" VerticalAlignment="Top" Width="230" Grid.Row="1" ItemsSource="{Binding Order}"> <!--ItemsSource="{Binding Order}"-->
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn/>
+                        <GridViewColumn Header="Plat" DisplayMemberBinding="{Binding Nom_Plat}"/>
+                        <GridViewColumn Header="Prix" DisplayMemberBinding="{Binding Prix_Plat}" />
                     </GridView>
                 </ListView.View>
             </ListView>

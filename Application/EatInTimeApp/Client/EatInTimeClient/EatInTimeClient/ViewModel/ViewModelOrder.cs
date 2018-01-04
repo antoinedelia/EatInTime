@@ -6,11 +6,14 @@ using EatInTimeClient.Helpers;
 using System;
 using Microsoft.Win32;
 using System.Windows;
+using System.ComponentModel;
 
 namespace EatInTimeClient.ViewModel
 {
-    public class ViewModelOrder : ViewModelBase
+    public class ViewModelOrder : ViewModelBase, INotifyPropertyChanged
     {
+        //public static event PropertyChangedEventHandler PropertyChanged;
+        ViewModelBase vmBase = new ViewModelBase();
         public ObservableCollection<Plat> AllDishes { get; set; }
         public ObservableCollection<Plat> Dishes { get; set; }
         private ObservableCollection<Plat> _Entrees;
@@ -22,20 +25,14 @@ namespace EatInTimeClient.ViewModel
         public ObservableCollection<Plat> Desserts { get; set; }
         public ObservableCollection<Plat> Drinks { get; set; }
         object _SelectedDish;
-        private ObservableCollection<Plat> _Order;
+        private static ObservableCollection<Plat> _Order;
         public ObservableCollection<Plat> Order
         {
             get { return _Order; }
-            set { _Order = value; }
-        }
-
-        private string _test;
-        public string Test
-        {
-            get { return _test; }
             set
             {
-                _test = value;
+                _Order = value;
+                OnPropertyChanged("ObservableEntrees");
             }
         }
         private RelayCommand _addEntreeToCommand;
@@ -45,7 +42,7 @@ namespace EatInTimeClient.ViewModel
             {
                 if (_addEntreeToCommand == null)
                 {
-                    _addEntreeToCommand = new RelayCommand<object>(DoAdd);
+                    _addEntreeToCommand = new RelayCommand<object>(DoAddEntree);
                 }
                 return _addEntreeToCommand;
             }
@@ -114,18 +111,17 @@ namespace EatInTimeClient.ViewModel
                 Entrees = new ObservableCollection<Plat>(AllDishes.Where(n => n.Type_Plat.Nom_Type_Plat == "Entrée"));
                 Desserts = new ObservableCollection<Plat>(AllDishes.Where(n => n.Type_Plat.Nom_Type_Plat == "Dessert"));
                 Drinks = new ObservableCollection<Plat>(AllDishes.Where(n => n.Type_Plat.Nom_Type_Plat == "Boisson"));
-                
             }
-            Order = new ObservableCollection<Plat>();
         }
 
-        private void DoAdd(object obj)
+        private void DoAddEntree(object obj)
         {
             int index = (int)obj;
             Plat plat = Entrees[index];
-            _Order.Add(plat);
+            if(Order == null) Order = new ObservableCollection<Plat>();
+            Order.Add(plat);
         }
-        
+
         private ObservableCollection<Plat> EditIngredients(ObservableCollection<Plat> ListePlats)
         {
             foreach (Plat Plat in ListePlats)
@@ -137,7 +133,6 @@ namespace EatInTimeClient.ViewModel
                 }
                 if (Plat.String_Ingredients != null) Plat.String_Ingredients = Plat.String_Ingredients.Remove((Plat.String_Ingredients.Length - 2));
                 //Plat.String_Ingredients = Plat.Ingredients.OfType<string>();//Plat.Ingredients.ToString();
-                Test = "Test";
 	        }
             return ListePlats;
         }
