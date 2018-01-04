@@ -15,7 +15,7 @@ namespace EatInTimeClient.View
             InitializeComponent();
             ViewModel.ViewModelOrder vmorder = new ViewModel.ViewModelOrder();
             DishesItemsControl.ItemsSource = vmorder.Dishes;
-            EntreesItemsControl.ItemsSource = vmorder.Entrees;
+            //EntreesItemsControl.ItemsSource = vmorder.Entrees;
             DessertsItemsControl.ItemsSource = vmorder.Desserts;
             DrinkssItemsControl.ItemsSource = vmorder.Drinks;
         }

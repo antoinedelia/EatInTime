@@ -77,7 +77,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EatInTimeDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\Command.cs" />
+    <Compile Include="Helpers\RelayCommand.cs" />
     <Compile Include="View\UserControlOrdering.xaml.cs">
       <DependentUpon>UserControlOrdering.xaml</DependentUpon>
     </Compile>

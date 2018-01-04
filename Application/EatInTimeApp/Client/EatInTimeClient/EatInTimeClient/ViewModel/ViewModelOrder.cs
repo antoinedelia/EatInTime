@@ -4,6 +4,8 @@ using System.Linq;
 using System.Windows.Input;
 using EatInTimeClient.Helpers;
 using System;
+using Microsoft.Win32;
+using System.Windows;
 
 namespace EatInTimeClient.ViewModel
 {
@@ -11,12 +13,75 @@ namespace EatInTimeClient.ViewModel
     {
         public ObservableCollection<Plat> AllDishes { get; set; }
         public ObservableCollection<Plat> Dishes { get; set; }
-        public ObservableCollection<Plat> Entrees { get; set; }
+        private ObservableCollection<Plat> _Entrees;
+        public ObservableCollection<Plat> Entrees
+        {
+            get { return _Entrees; }
+            set { _Entrees = value; }
+        }
         public ObservableCollection<Plat> Desserts { get; set; }
         public ObservableCollection<Plat> Drinks { get; set; }
         object _SelectedDish;
+        private ObservableCollection<Plat> _Order;
+        public ObservableCollection<Plat> Order
+        {
+            get { return _Order; }
+            set { _Order = value; }
+        }
 
-        public Command AddToOrderCommand { get; set; }
+        private string _test;
+        public string Test
+        {
+            get { return _test; }
+            set
+            {
+                _test = value;
+            }
+        }
+        private RelayCommand _addDishToCommand;
+        public RelayCommand AddDishToCommand
+        {
+            get
+            {
+                if (_addDishToCommand == null)
+                {
+                    _addDishToCommand = new RelayCommand<object>(DoAdd);
+                }
+                return _addDishToCommand;
+            }
+        }
+        private bool canExecute = true;
+
+        public bool CanExecute
+        {
+            get
+            {
+                return canExecute;
+            }
+            set
+            {
+                if(canExecute == value)
+                {
+                    return;
+                }
+                canExecute = value;
+            }
+        }
+        
+        //public ICommand AddToOrderCommand
+        //{
+        //    get
+        //    {
+        //        return addToOrderCommand;
+        //    }
+        //    set
+        //    {
+        //        addToOrderCommand = value;
+        //    }
+        //}
+
+        //public ICommand AddToOrderCommand{get{return new RelayCommand(() => AddToOrder(), true); } }
+        //public Command AddToOrderCommand { get; set; }
 
         public object SelectedDish
         {
@@ -50,20 +115,15 @@ namespace EatInTimeClient.ViewModel
                 Desserts = new ObservableCollection<Plat>(AllDishes.Where(n => n.Type_Plat.Nom_Type_Plat == "Dessert"));
                 Drinks = new ObservableCollection<Plat>(AllDishes.Where(n => n.Type_Plat.Nom_Type_Plat == "Boisson"));
             }
-
-            AddToOrderCommand = new Command
-            {
-                CanExecuteFunc = obj => true,
-                ExecuteFunc = AddToOrder
-            };
+            //AddDishToCommand = new RelayCommand(DoAdd);
         }
 
-        private void AddToOrder(object obj)
+        private void DoAdd(object obj)
         {
-            throw new NotImplementedException();
+            var str = obj as string;
+           //MessageBox.Show(str);
+           //Order.Add((Plat)obj);
         }
-
-        //public ICommand AddToOrder{ get; set; }
 
         private ObservableCollection<Plat> EditIngredients(ObservableCollection<Plat> ListePlats)
         {
@@ -76,8 +136,23 @@ namespace EatInTimeClient.ViewModel
                 }
                 if (Plat.String_Ingredients != null) Plat.String_Ingredients = Plat.String_Ingredients.Remove((Plat.String_Ingredients.Length - 2));
                 //Plat.String_Ingredients = Plat.Ingredients.OfType<string>();//Plat.Ingredients.ToString();
+                Test = "Test";
 	        }
             return ListePlats;
+        }
+
+        private class RelayCommand<T> : RelayCommand
+        {
+            private RelayCommand addDishToCommand;
+
+            //public RelayCommand(RelayCommand addDishToCommand)
+            //{
+            //    this.addDishToCommand = addDishToCommand;
+            //}
+
+            public RelayCommand(Action<object> execute) : base(execute)
+            {
+            }
         }
     }
 }

@@ -4,7 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:EatInTimeClient.View"
+             xmlns:viewn="clr-namespace:EatInTimeClient.ViewModel"
              mc:Ignorable="d" Height="700" Width="1000">
+    <UserControl.DataContext>
+        <viewn:ViewModelOrder/>
+    </UserControl.DataContext>
     <Grid Margin="0,0,0,0">
         <Grid Margin="0,0,-0,0">
             <Grid.RowDefinitions>
@@ -17,10 +21,13 @@
             </Grid.ColumnDefinitions>
             <TabControl x:Name="DishesTabControl" HorizontalAlignment="Left" Height="636" Margin="0,0,0,0" VerticalAlignment="Top" Width="848" Grid.Row="1" SelectedIndex="2">
                 <TabItem x:Name="MenuTab" Header="Menus">
-                    <Grid Background="#FFE5E5E5"/>
+                    <Grid Background="#FFE5E5E5">
+                        <Button Content="{Binding Test}" Command="{Binding AddDishToCommand}"/>
+                    </Grid>
+
                 </TabItem>
                 <TabItem x:Name="EntreesTab" Header="Entrées">
-                    <ItemsControl Name="EntreesItemsControl">
+                    <ItemsControl Name="EntreesItemsControl" ItemsSource="{Binding Entrees}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
@@ -34,7 +41,11 @@
                                             <RowDefinition/>
                                             <RowDefinition/>
                                         </Grid.RowDefinitions>
-                                        <Button Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Content="Commander" Command="{Binding Path=AddToOrderCommand}"/>
+                                        <Button Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Content="{Binding Test}" Command="{Binding AddDishToCommand}" CommandParameter="{Binding }">
+                                            <Button.DataContext>
+                                                <viewn:ViewModelOrder/>
+                                            </Button.DataContext>
+                                        </Button>
                                         <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Nom_Plat}" FontSize="10"/>
                                         <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding String_Ingredients}" FontSize="10" />
 
@@ -46,7 +57,7 @@
                     </ItemsControl>
                 </TabItem>
                 <TabItem x:Name="PlatTab" Header="Plats">
-                    <ItemsControl Name="DishesItemsControl">
+                    <ItemsControl Name="DishesItemsControl" ItemsSource="{Binding Plat}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
@@ -156,9 +167,8 @@
                 </TabItem>
             </TabControl>
             <TextBox x:Name="SearchDishTextBox" HorizontalAlignment="Left" Height="23" Margin="10,7,0,0" TextWrapping="Wrap" Text="Rechercher un plat" VerticalAlignment="Top" Width="370" GotFocus="SearchDishTextBox_GotFocus" />
-            <!--LostFocus="SearchDishTextBox_LostFocus" -->
             <Button x:Name="SearchButton" Content="Rechercher" HorizontalAlignment="Left" Margin="390,7,0,0" VerticalAlignment="Top" Width="142" Height="23" Click="SearchButton_Click"/>
-            <ListView x:Name="CommandListBox" Grid.Column="1" HorizontalAlignment="Left" Height="636" Margin="10,1,0,0" VerticalAlignment="Top" Width="230" Grid.Row="1">
+            <ListView x:Name="CommandListBox" Grid.Column="1" HorizontalAlignment="Left" Height="636" Margin="10,1,0,0" VerticalAlignment="Top" Width="230" Grid.Row="1" ItemsSource="{Binding Order}">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn/>
