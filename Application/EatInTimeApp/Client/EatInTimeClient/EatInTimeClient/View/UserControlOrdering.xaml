@@ -14,17 +14,15 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="19*"/>
                 <RowDefinition Height="329*"/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="66*"/>
                 <ColumnDefinition Width="19*"/>
             </Grid.ColumnDefinitions>
-            <TabControl x:Name="DishesTabControl" HorizontalAlignment="Left" Height="636" Margin="0,0,0,0" VerticalAlignment="Top" Width="848" Grid.Row="1" SelectedIndex="2">
+            <TabControl x:Name="DishesTabControl" HorizontalAlignment="Left" Height="636" Margin="0,0,0,0" VerticalAlignment="Top" Width="848" Grid.Row="1" SelectedIndex="1">
                 <TabItem x:Name="MenuTab" Header="Menus">
-                    <Grid Background="#FFE5E5E5">
-                        <Button Content="{Binding Test}" Command="{Binding AddDishToCommand}"/>
-                    </Grid>
-
+                
                 </TabItem>
                 <TabItem x:Name="EntreesTab" Header="Entrées">
                     <ItemsControl Name="EntreesItemsControl" ItemsSource="{Binding Entrees}" AlternationCount="100">
@@ -41,10 +39,13 @@
                                             <RowDefinition/>
                                             <RowDefinition/>
                                         </Grid.RowDefinitions>
-                                        <Button Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Content="Commander" Command="{Binding AddEntreeToCommand}" CommandParameter="{Binding Path=(ItemsControl.AlternationIndex),RelativeSource={RelativeSource TemplatedParent}}">
-                                            <Button.DataContext>
+                                        <!--<Button x:Name="AddEntreeButton" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Content="Commander" >--><!--Command="{Binding AddEntreeToCommand}" CommandParameter="{Binding Path=(ItemsControl.AlternationIndex),RelativeSource={RelativeSource TemplatedParent}}"-->
+                                            <!--<Button.DataContext>
                                                 <viewn:ViewModelOrder/>
-                                            </Button.DataContext>
+                                            </Button.DataContext>-->
+                                        <Button Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Content="Commander" Command="{Binding AddEntreeToCommand}"
+                                                CommandParameter="{Binding Path=(ItemsControl.AlternationIndex),RelativeSource={RelativeSource TemplatedParent}}"
+                                               DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext}">
                                         </Button>
                                         <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Nom_Plat}" FontSize="10"/>
                                         <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding String_Ingredients}" FontSize="10" />
@@ -57,7 +58,7 @@
                     </ItemsControl>
                 </TabItem>
                 <TabItem x:Name="PlatTab" Header="Plats">
-                    <ItemsControl Name="DishesItemsControl" ItemsSource="{Binding Plat}">
+                    <ItemsControl Name="DishesItemsControl">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
@@ -166,9 +167,9 @@
                     </Grid>
                 </TabItem>
             </TabControl>
-            <TextBox x:Name="SearchDishTextBox" HorizontalAlignment="Left" Height="23" Margin="10,7,0,0" TextWrapping="Wrap" Text="Rechercher un plat" VerticalAlignment="Top" Width="370" GotFocus="SearchDishTextBox_GotFocus" />
-            <Button x:Name="SearchButton" Content="Rechercher" HorizontalAlignment="Left" Margin="390,7,0,0" VerticalAlignment="Top" Width="142" Height="23" Click="SearchButton_Click"/>
-            <ListView x:Name="CommandListBox" Grid.Column="1" HorizontalAlignment="Left" Height="636" Margin="10,1,0,0" VerticalAlignment="Top" Width="230" Grid.Row="1" ItemsSource="{Binding Order}"> <!--ItemsSource="{Binding Order}"-->
+            <TextBox x:Name="SearchDishTextBox" HorizontalAlignment="Left" Height="23" Margin="10,7,0,0" TextWrapping="Wrap" Text="{Binding SearchString, Mode=OneWayToSource}" VerticalAlignment="Top" Width="370" GotFocus="SearchDishTextBox_GotFocus" />
+            <Button x:Name="SearchButton" Content="Rechercher" HorizontalAlignment="Left" Margin="390,7,0,0" VerticalAlignment="Top" Width="142" Height="23" Click="SearchButton_Click" Command="{Binding SearchDish}" CommandParameter="{Binding }" /> <!--CommandParameter="{Binding Text, ElementName=SearchDishTextBox}"-->
+            <ListView x:Name="CommandListBox" Grid.Column="1" HorizontalAlignment="Left" Height="636" Margin="10,1,0,0" VerticalAlignment="Top" Width="230" Grid.Row="1" IsEnabled="True" ItemsSource="{Binding Path=Order, UpdateSourceTrigger=PropertyChanged}" >
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Plat" DisplayMemberBinding="{Binding Nom_Plat}"/>
@@ -176,7 +177,9 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-            <TextBox x:Name="InertCommandTextbox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="10,0,0,0" Text="Commande" VerticalAlignment="Top" Width="230" TextWrapping="Wrap" IsReadOnly="True" TextAlignment="Center" Grid.Row="1"/>
+            <!--<ListBox x:Name="Command" ItemsSource="{Binding Path=TotalPrice, UpdateSourceTrigger=PropertyChanged}" />-->
+            <TextBox x:Name="PriceTB" Grid.Column="1" HorizontalAlignment="Left" Text="{Binding Path=TotalPrice}" />
+            <TextBox x:Name="InertCommandTextbox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="10,0,0,0" Text="Commande" VerticalAlignment="Top" Width="230" TextWrapping="Wrap" IsReadOnly="True" TextAlignment="Center" Grid.Row="2"/>
         </Grid>
     </Grid>
 </UserControl>

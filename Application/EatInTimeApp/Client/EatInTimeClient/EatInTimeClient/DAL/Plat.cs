@@ -6,7 +6,7 @@ namespace EatInTimeClient.DAL
     using System.ComponentModel.DataAnnotations.Schema;
 
     [Table("Plat")]
-    public partial class Plat
+    public partial class Plat : INotifyPropertyChanged
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Plat()
@@ -37,6 +37,8 @@ namespace EatInTimeClient.DAL
         public string String_Ingredients { get; set; }
         [NotMapped]
         public bool Is_In_Menu { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         //public event PropertyChangedEventHandler PropertyChanged;
     }

@@ -7,12 +7,12 @@ using System;
 using Microsoft.Win32;
 using System.Windows;
 using System.ComponentModel;
+using System.Collections.Specialized;
 
 namespace EatInTimeClient.ViewModel
 {
     public class ViewModelOrder : ViewModelBase, INotifyPropertyChanged
     {
-        //public static event PropertyChangedEventHandler PropertyChanged;
         ViewModelBase vmBase = new ViewModelBase();
         public ObservableCollection<Plat> AllDishes { get; set; }
         public ObservableCollection<Plat> Dishes { get; set; }
@@ -20,7 +20,11 @@ namespace EatInTimeClient.ViewModel
         public ObservableCollection<Plat> Entrees
         {
             get { return _Entrees; }
-            set { _Entrees = value; }
+            set
+            {
+                _Entrees = value;
+                OnPropertyChanged("Entrees");
+            }
         }
         public ObservableCollection<Plat> Desserts { get; set; }
         public ObservableCollection<Plat> Drinks { get; set; }
@@ -32,7 +36,28 @@ namespace EatInTimeClient.ViewModel
             set
             {
                 _Order = value;
-                OnPropertyChanged("ObservableEntrees");
+                OnPropertyChanged("Order");
+            }
+        }
+
+        private string _searchString;
+        public string SearchString
+        {
+            get { return _searchString; }
+            set
+            {
+                _searchString = value;
+            }
+        }
+
+        private decimal _TotalPrice;
+        public decimal TotalPrice
+        {
+            get { return _TotalPrice; }
+            set
+            {
+                _TotalPrice = value;
+                OnPropertyChanged("TotalPrice");
             }
         }
         private RelayCommand _addEntreeToCommand;
@@ -47,6 +72,27 @@ namespace EatInTimeClient.ViewModel
                 return _addEntreeToCommand;
             }
         }
+
+        private RelayCommand _searchDish;
+        public RelayCommand SearchDish
+        {
+            get
+            {
+                if(_searchDish == null)
+                {
+                    _searchDish = new RelayCommand<object>(DoSearchDish);
+                }
+                return _searchDish;
+            }
+        }
+
+        private void DoSearchDish(object obj)
+        {
+            string search = obj.ToString();
+
+            Dishes = new ObservableCollection<Plat>(AllDishes.Where(n => n.Nom_Plat.Contains(search)));
+        }
+
         private bool canExecute = true;
 
         public bool CanExecute
@@ -118,9 +164,45 @@ namespace EatInTimeClient.ViewModel
         {
             int index = (int)obj;
             Plat plat = Entrees[index];
-            if(Order == null) Order = new ObservableCollection<Plat>();
+            if (Order == null)
+            {
+                Order = new ObservableCollection<Plat>();
+            }
             Order.Add(plat);
+            TotalPrice += plat.Prix_Plat;
         }
+
+        //private void Adding_Plats(object sender, NotifyCollectionChangedEventArgs e)
+        //{
+        //    foreach(Plat item in e.NewItems)
+        //    {
+        //        item.PropertyChanged += NewItemPropertyChanged;
+        //    }
+        //}
+
+        //private void NewItemPropertyChanged(object sender, PropertyChangedEventArgs e)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //static void items_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        //{
+        //    if (e.OldItems != null)
+        //    {
+        //        foreach (INotifyPropertyChanged item in e.OldItems)
+        //            item.PropertyChanged -= item_PropertyChanged;
+        //    }
+        //    if (e.NewItems != null)
+        //    {
+        //        foreach (INotifyPropertyChanged item in e.NewItems)
+        //            item.PropertyChanged += item_PropertyChanged;
+        //    }
+        //}
+
+        //static void item_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         private ObservableCollection<Plat> EditIngredients(ObservableCollection<Plat> ListePlats)
         {

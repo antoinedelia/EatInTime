@@ -13,9 +13,12 @@ namespace EatInTimeClient.View
         public UserControlOrdering()
         {
             InitializeComponent();
+
             //ViewModel.ViewModelOrder vmorder = new ViewModel.ViewModelOrder();
+            //DataContext = vmorder;
+
+            //EntreesItemsControl.ItemsSource = vmorder.Entrees;
             //DishesItemsControl.ItemsSource = vmorder.Dishes;
-            ////EntreesItemsControl.ItemsSource = vmorder.Entrees;
             //DessertsItemsControl.ItemsSource = vmorder.Desserts;
             //DrinkssItemsControl.ItemsSource = vmorder.Drinks;
         }
