@@ -14,8 +14,20 @@ namespace EatInTimeClient.ViewModel
     public class ViewModelOrder : ViewModelBase, INotifyPropertyChanged
     {
         ViewModelBase vmBase = new ViewModelBase();
+
         public ObservableCollection<Plat> AllDishes { get; set; }
-        public ObservableCollection<Plat> Dishes { get; set; }
+
+        private ObservableCollection<Plat> _Dishes;
+        public ObservableCollection<Plat> Dishes
+        {
+            get { return _Dishes; }
+            set
+            {
+                _Dishes = value;
+                OnPropertyChanged("Dishes");
+            }
+        }
+
         private ObservableCollection<Plat> _Entrees;
         public ObservableCollection<Plat> Entrees
         {
@@ -26,9 +38,31 @@ namespace EatInTimeClient.ViewModel
                 OnPropertyChanged("Entrees");
             }
         }
-        public ObservableCollection<Plat> Desserts { get; set; }
-        public ObservableCollection<Plat> Drinks { get; set; }
+
+        private ObservableCollection<Plat> _Desserts;
+        public ObservableCollection<Plat> Desserts
+        {
+            get { return _Desserts; }
+            set
+            {
+                _Desserts = value;
+                OnPropertyChanged("Desserts");
+            }
+        }
+
+        private ObservableCollection<Plat> _Drinks;
+        public ObservableCollection<Plat> Drinks
+        {
+            get { return _Drinks; }
+            set
+            {
+                _Drinks = value;
+                OnPropertyChanged("Drinks");
+            }
+        }
+
         object _SelectedDish;
+
         private static ObservableCollection<Plat> _Order;
         public ObservableCollection<Plat> Order
         {
@@ -73,6 +107,46 @@ namespace EatInTimeClient.ViewModel
             }
         }
 
+        private RelayCommand _addDishToCommand;
+        public RelayCommand AddDishToCommand
+        {
+            get
+            {
+                if(_addDishToCommand == null)
+                {
+                    _addDishToCommand = new RelayCommand<object>(DoAddDish);
+                }
+                return _addDishToCommand;
+            }
+
+        }
+
+        private RelayCommand _addDessertToCommand;
+        public RelayCommand AddDessertToCommand
+        {
+            get
+            {
+                if(_addDessertToCommand == null)
+                {
+                    _addDessertToCommand = new RelayCommand<object>(DoAddDessert);
+                }
+                return _addDessertToCommand;
+            }
+        }
+
+        private RelayCommand _addDrinkToCommand;
+        public RelayCommand AddDrinkToCommand
+        {
+            get
+            {
+                if(_addDrinkToCommand == null)
+                {
+                    _addDrinkToCommand = new RelayCommand<object>(DoAddDrink);
+                }
+                return _addDrinkToCommand;
+            }
+        }
+
         private RelayCommand _searchDish;
         public RelayCommand SearchDish
         {
@@ -109,22 +183,7 @@ namespace EatInTimeClient.ViewModel
                 }
                 canExecute = value;
             }
-        }
-        
-        //public ICommand AddToOrderCommand
-        //{
-        //    get
-        //    {
-        //        return addToOrderCommand;
-        //    }
-        //    set
-        //    {
-        //        addToOrderCommand = value;
-        //    }
-        //}
-
-        //public ICommand AddToOrderCommand{get{return new RelayCommand(() => AddToOrder(), true); } }
-        //public Command AddToOrderCommand { get; set; }
+        }      
 
         public object SelectedDish
         {
@@ -160,6 +219,8 @@ namespace EatInTimeClient.ViewModel
             }
         }
 
+        #region AddToOrderMethods
+
         private void DoAddEntree(object obj)
         {
             int index = (int)obj;
@@ -171,38 +232,42 @@ namespace EatInTimeClient.ViewModel
             Order.Add(plat);
             TotalPrice += plat.Prix_Plat;
         }
+        private void DoAddDish(object obj)
+        {
+            int index = (int)obj;
+            Plat plat = Dishes[index];
+            if (Order == null)
+            {
+                Order = new ObservableCollection<Plat>();
+            }
+            Order.Add(plat);
+            TotalPrice += plat.Prix_Plat;
+        }
 
-        //private void Adding_Plats(object sender, NotifyCollectionChangedEventArgs e)
-        //{
-        //    foreach(Plat item in e.NewItems)
-        //    {
-        //        item.PropertyChanged += NewItemPropertyChanged;
-        //    }
-        //}
+        private void DoAddDessert(object obj)
+        {
+            int index = (int)obj;
+            Plat plat = Desserts[index];
+            if (Order == null)
+            {
+                Order = new ObservableCollection<Plat>();
+            }
+            Order.Add(plat);
+            TotalPrice += plat.Prix_Plat;
+        }
 
-        //private void NewItemPropertyChanged(object sender, PropertyChangedEventArgs e)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //static void items_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        //{
-        //    if (e.OldItems != null)
-        //    {
-        //        foreach (INotifyPropertyChanged item in e.OldItems)
-        //            item.PropertyChanged -= item_PropertyChanged;
-        //    }
-        //    if (e.NewItems != null)
-        //    {
-        //        foreach (INotifyPropertyChanged item in e.NewItems)
-        //            item.PropertyChanged += item_PropertyChanged;
-        //    }
-        //}
-
-        //static void item_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        private void DoAddDrink(object obj)
+        {
+            int index = (int)obj;
+            Plat plat = Drinks[index];
+            if (Order == null)
+            {
+                Order = new ObservableCollection<Plat>();
+            }
+            Order.Add(plat);
+            TotalPrice += plat.Prix_Plat;
+        }
+        #endregion
 
         private ObservableCollection<Plat> EditIngredients(ObservableCollection<Plat> ListePlats)
         {
@@ -222,11 +287,6 @@ namespace EatInTimeClient.ViewModel
         private class RelayCommand<T> : RelayCommand
         {
             private RelayCommand addDishToCommand;
-
-            //public RelayCommand(RelayCommand addDishToCommand)
-            //{
-            //    this.addDishToCommand = addDishToCommand;
-            //}
 
             public RelayCommand(Action<object> execute) : base(execute)
             {

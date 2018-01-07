@@ -10,17 +10,17 @@
         <viewn:ViewModelOrder/>
     </UserControl.DataContext>
     <Grid Margin="0,0,0,0">
-        <Grid Margin="0,0,-0,0">
+        <Grid Margin="0,0,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="19*"/>
                 <RowDefinition Height="329*"/>
-                <RowDefinition/>
+                <RowDefinition Height="19*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="66*"/>
                 <ColumnDefinition Width="19*"/>
             </Grid.ColumnDefinitions>
-            <TabControl x:Name="DishesTabControl" HorizontalAlignment="Left" Height="636" Margin="0,0,0,0" VerticalAlignment="Top" Width="848" Grid.Row="1" SelectedIndex="1">
+            <TabControl x:Name="DishesTabControl" HorizontalAlignment="Left" Height="636" Margin="0,0,0,00" VerticalAlignment="Top" Width="848" Grid.Row="1">
                 <TabItem x:Name="MenuTab" Header="Menus">
                 
                 </TabItem>
@@ -58,7 +58,7 @@
                     </ItemsControl>
                 </TabItem>
                 <TabItem x:Name="PlatTab" Header="Plats">
-                    <ItemsControl Name="DishesItemsControl">
+                    <ItemsControl Name="DishesItemsControl" ItemsSource="{Binding Dishes}" AlternationCount="100">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
@@ -72,6 +72,10 @@
                                             <RowDefinition/>
                                             <RowDefinition/>
                                         </Grid.RowDefinitions>
+                                        <Button Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Content="Commander" Command="{Binding AddDishToCommand}"
+                                                CommandParameter="{Binding Path=(ItemsControl.AlternationIndex),RelativeSource={RelativeSource TemplatedParent}}"
+                                               DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext}">
+                                        </Button>
                                         <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Nom_Plat}" FontSize="10"/>
                                         <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding String_Ingredients}" FontSize="10" />
                                         
@@ -109,7 +113,7 @@
                     </Grid>-->
                 </TabItem>
                 <TabItem x:Name="DessertTab" Header="Desserts">
-                    <ItemsControl Name="DessertsItemsControl">
+                    <ItemsControl Name="DessertsItemsControl" ItemsSource="{Binding Desserts}" AlternationCount="100">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
@@ -125,7 +129,10 @@
                                         </Grid.RowDefinitions>
                                         <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Nom_Plat}" FontSize="10"/>
                                         <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding String_Ingredients}" FontSize="10" />
-
+                                        <Button Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Content="Commander" Command="{Binding AddDessertToCommand}"
+                                                CommandParameter="{Binding Path=(ItemsControl.AlternationIndex),RelativeSource={RelativeSource TemplatedParent}}"
+                                               DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext}">
+                                        </Button>
                                         <TextBox Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" Text="{Binding Prix_Plat, StringFormat=' {0} €'}" FontSize="10"/>
                                     </Grid>
                                 </StackPanel>
@@ -134,7 +141,7 @@
                     </ItemsControl>
                 </TabItem>
                 <TabItem x:Name="DrinksTab" Header="Boissons">
-                    <ItemsControl Name="DrinkssItemsControl">
+                    <ItemsControl Name="DrinkssItemsControl" ItemsSource="{Binding Drinks}" AlternationCount="100">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
@@ -150,7 +157,10 @@
                                         </Grid.RowDefinitions>
                                         <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Nom_Plat}" FontSize="10"/>
                                         <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding String_Ingredients}" FontSize="10" />
-
+                                        <Button Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Content="Commander" Command="{Binding AddDrinkToCommand}"
+                                                CommandParameter="{Binding Path=(ItemsControl.AlternationIndex),RelativeSource={RelativeSource TemplatedParent}}"
+                                               DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext}">
+                                        </Button>
                                         <TextBox Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" Text="{Binding Prix_Plat, StringFormat=' {0} €'}" FontSize="10"/>
                                     </Grid>
                                 </StackPanel>
@@ -169,7 +179,7 @@
             </TabControl>
             <TextBox x:Name="SearchDishTextBox" HorizontalAlignment="Left" Height="23" Margin="10,7,0,0" TextWrapping="Wrap" Text="{Binding SearchString, Mode=OneWayToSource}" VerticalAlignment="Top" Width="370" GotFocus="SearchDishTextBox_GotFocus" />
             <Button x:Name="SearchButton" Content="Rechercher" HorizontalAlignment="Left" Margin="390,7,0,0" VerticalAlignment="Top" Width="142" Height="23" Click="SearchButton_Click" Command="{Binding SearchDish}" CommandParameter="{Binding }" /> <!--CommandParameter="{Binding Text, ElementName=SearchDishTextBox}"-->
-            <ListView x:Name="CommandListBox" Grid.Column="1" HorizontalAlignment="Left" Height="636" Margin="10,1,0,0" VerticalAlignment="Top" Width="230" Grid.Row="1" IsEnabled="True" ItemsSource="{Binding Path=Order, UpdateSourceTrigger=PropertyChanged}" >
+            <ListView x:Name="CommandListView" Grid.Column="1" HorizontalAlignment="Left" Height="636" Margin="10,1,0,0" VerticalAlignment="Top" Width="230" Grid.Row="1" IsEnabled="True" ItemsSource="{Binding Path=Order, UpdateSourceTrigger=PropertyChanged}" >
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Plat" DisplayMemberBinding="{Binding Nom_Plat}"/>
@@ -178,8 +188,8 @@
                 </ListView.View>
             </ListView>
             <!--<ListBox x:Name="Command" ItemsSource="{Binding Path=TotalPrice, UpdateSourceTrigger=PropertyChanged}" />-->
-            <TextBox x:Name="PriceTB" Grid.Column="1" HorizontalAlignment="Left" Text="{Binding Path=TotalPrice}" />
-            <TextBox x:Name="InertCommandTextbox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="10,0,0,0" Text="Commande" VerticalAlignment="Top" Width="230" TextWrapping="Wrap" IsReadOnly="True" TextAlignment="Center" Grid.Row="2"/>
+            <TextBox x:Name="PriceTB" Grid.Column="1" Grid.Row="2" Margin="10,0,0,0" HorizontalAlignment="Left" Text="{Binding Path=TotalPrice, StringFormat='Prix total : {0}'}" Width="230" />
+            <TextBox x:Name="InertCommandTextbox" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" Height="24" Margin="10,0,0,0" Text="Commande" VerticalAlignment="Top" Width="230" TextWrapping="Wrap" IsReadOnly="True" TextAlignment="Center" />
         </Grid>
     </Grid>
 </UserControl>
