@@ -2013,6 +2013,8 @@ namespace EatInTimeClient {
             
             private global::System.Data.DataColumn columnId_Emplacement;
             
+            private global::System.Data.DataColumn columnEst_Occupee;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public TablesDataTable() {
@@ -2080,6 +2082,14 @@ namespace EatInTimeClient {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Est_OccupeeColumn {
+                get {
+                    return this.columnEst_Occupee;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -2115,13 +2125,14 @@ namespace EatInTimeClient {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public TablesRow AddTablesRow(int Numero_Table, int Capacite_Table, EmplacementRow parentEmplacementRowByFK_Tables_Id_Emplacement) {
+            public TablesRow AddTablesRow(int Numero_Table, int Capacite_Table, EmplacementRow parentEmplacementRowByFK_Tables_Id_Emplacement, bool Est_Occupee) {
                 TablesRow rowTablesRow = ((TablesRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         Numero_Table,
                         Capacite_Table,
-                        null};
+                        null,
+                        Est_Occupee};
                 if ((parentEmplacementRowByFK_Tables_Id_Emplacement != null)) {
                     columnValuesArray[3] = parentEmplacementRowByFK_Tables_Id_Emplacement[0];
                 }
@@ -2158,6 +2169,7 @@ namespace EatInTimeClient {
                 this.columnNumero_Table = base.Columns["Numero_Table"];
                 this.columnCapacite_Table = base.Columns["Capacite_Table"];
                 this.columnId_Emplacement = base.Columns["Id_Emplacement"];
+                this.columnEst_Occupee = base.Columns["Est_Occupee"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2171,6 +2183,8 @@ namespace EatInTimeClient {
                 base.Columns.Add(this.columnCapacite_Table);
                 this.columnId_Emplacement = new global::System.Data.DataColumn("Id_Emplacement", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnId_Emplacement);
+                this.columnEst_Occupee = new global::System.Data.DataColumn("Est_Occupee", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEst_Occupee);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnId_Table}, true));
                 this.columnId_Table.AutoIncrement = true;
@@ -2958,6 +2972,22 @@ namespace EatInTimeClient {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool Est_Occupee {
+                get {
+                    try {
+                        return ((bool)(this[this.tableTables.Est_OccupeeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("La valeur pour la colonne \'Est_Occupee\' dans la table \'Tables\' est DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTables.Est_OccupeeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public EmplacementRow EmplacementRow {
                 get {
                     return ((EmplacementRow)(this.GetParentRow(this.Table.ParentRelations["FK_Tables_Id_Emplacement"])));
@@ -2977,6 +3007,18 @@ namespace EatInTimeClient {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetCapacite_TableNull() {
                 this[this.tableTables.Capacite_TableColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsEst_OccupeeNull() {
+                return this.IsNull(this.tableTables.Est_OccupeeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetEst_OccupeeNull() {
+                this[this.tableTables.Est_OccupeeColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5034,39 +5076,44 @@ SELECT Id_Plat, Nom_Plat, Prix_Plat, Id_Type_Plat FROM Plat WHERE (Id_Plat = @Id
             tableMapping.ColumnMappings.Add("Numero_Table", "Numero_Table");
             tableMapping.ColumnMappings.Add("Capacite_Table", "Capacite_Table");
             tableMapping.ColumnMappings.Add("Id_Emplacement", "Id_Emplacement");
+            tableMapping.ColumnMappings.Add("Est_Occupee", "Est_Occupee");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[Tables] WHERE (([Id_Table] = @Original_Id_Table) AND ([Numero_Table] = @Original_Numero_Table) AND ((@IsNull_Capacite_Table = 1 AND [Capacite_Table] IS NULL) OR ([Capacite_Table] = @Original_Capacite_Table)) AND ([Id_Emplacement] = @Original_Id_Emplacement))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [Tables] WHERE (([Id_Table] = @Original_Id_Table) AND ([Numero_Table] = @Original_Numero_Table) AND ((@IsNull_Capacite_Table = 1 AND [Capacite_Table] IS NULL) OR ([Capacite_Table] = @Original_Capacite_Table)) AND ([Id_Emplacement] = @Original_Id_Emplacement) AND ((@IsNull_Est_Occupee = 1 AND [Est_Occupee] IS NULL) OR ([Est_Occupee] = @Original_Est_Occupee)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id_Table", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id_Table", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Numero_Table", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Numero_Table", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Capacite_Table", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Capacite_Table", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Capacite_Table", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Capacite_Table", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id_Emplacement", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id_Emplacement", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Est_Occupee", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Est_Occupee", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Est_Occupee", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Est_Occupee", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[Tables] ([Numero_Table], [Capacite_Table], [Id_Emplacement]) V" +
-                "ALUES (@Numero_Table, @Capacite_Table, @Id_Emplacement);\r\nSELECT Id_Table, Numer" +
-                "o_Table, Capacite_Table, Id_Emplacement FROM Tables WHERE (Id_Table = SCOPE_IDEN" +
-                "TITY())";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [Tables] ([Numero_Table], [Capacite_Table], [Id_Emplacement], [Est_Occupee]) VALUES (@Numero_Table, @Capacite_Table, @Id_Emplacement, @Est_Occupee);
+SELECT Id_Table, Numero_Table, Capacite_Table, Id_Emplacement, Est_Occupee FROM Tables WHERE (Id_Table = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Numero_Table", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Numero_Table", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Capacite_Table", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Capacite_Table", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Id_Emplacement", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id_Emplacement", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Est_Occupee", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Est_Occupee", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Tables] SET [Numero_Table] = @Numero_Table, [Capacite_Table] = @Capacite_Table, [Id_Emplacement] = @Id_Emplacement WHERE (([Id_Table] = @Original_Id_Table) AND ([Numero_Table] = @Original_Numero_Table) AND ((@IsNull_Capacite_Table = 1 AND [Capacite_Table] IS NULL) OR ([Capacite_Table] = @Original_Capacite_Table)) AND ([Id_Emplacement] = @Original_Id_Emplacement));
-SELECT Id_Table, Numero_Table, Capacite_Table, Id_Emplacement FROM Tables WHERE (Id_Table = @Id_Table)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [Tables] SET [Numero_Table] = @Numero_Table, [Capacite_Table] = @Capacite_Table, [Id_Emplacement] = @Id_Emplacement, [Est_Occupee] = @Est_Occupee WHERE (([Id_Table] = @Original_Id_Table) AND ([Numero_Table] = @Original_Numero_Table) AND ((@IsNull_Capacite_Table = 1 AND [Capacite_Table] IS NULL) OR ([Capacite_Table] = @Original_Capacite_Table)) AND ([Id_Emplacement] = @Original_Id_Emplacement) AND ((@IsNull_Est_Occupee = 1 AND [Est_Occupee] IS NULL) OR ([Est_Occupee] = @Original_Est_Occupee)));
+SELECT Id_Table, Numero_Table, Capacite_Table, Id_Emplacement, Est_Occupee FROM Tables WHERE (Id_Table = @Id_Table)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Numero_Table", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Numero_Table", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Capacite_Table", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Capacite_Table", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Id_Emplacement", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id_Emplacement", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Est_Occupee", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Est_Occupee", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id_Table", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id_Table", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Numero_Table", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Numero_Table", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Capacite_Table", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Capacite_Table", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Capacite_Table", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Capacite_Table", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id_Emplacement", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id_Emplacement", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Est_Occupee", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Est_Occupee", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Est_Occupee", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Est_Occupee", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Id_Table", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Id_Table", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
@@ -5083,7 +5130,8 @@ SELECT Id_Table, Numero_Table, Capacite_Table, Id_Emplacement FROM Tables WHERE 
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT Id_Table, Numero_Table, Capacite_Table, Id_Emplacement FROM dbo.Tables";
+            this._commandCollection[0].CommandText = "SELECT Id_Table, Numero_Table, Capacite_Table, Id_Emplacement, Est_Occupee FROM T" +
+                "ables";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -5144,7 +5192,7 @@ SELECT Id_Table, Numero_Table, Capacite_Table, Id_Emplacement FROM Tables WHERE 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_Id_Table, int Original_Numero_Table, global::System.Nullable<int> Original_Capacite_Table, int Original_Id_Emplacement) {
+        public virtual int Delete(int Original_Id_Table, int Original_Numero_Table, global::System.Nullable<int> Original_Capacite_Table, int Original_Id_Emplacement, global::System.Nullable<bool> Original_Est_Occupee) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_Id_Table));
             this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(Original_Numero_Table));
             if ((Original_Capacite_Table.HasValue == true)) {
@@ -5156,6 +5204,14 @@ SELECT Id_Table, Numero_Table, Capacite_Table, Id_Emplacement FROM Tables WHERE 
                 this.Adapter.DeleteCommand.Parameters[3].Value = global::System.DBNull.Value;
             }
             this.Adapter.DeleteCommand.Parameters[4].Value = ((int)(Original_Id_Emplacement));
+            if ((Original_Est_Occupee.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((bool)(Original_Est_Occupee.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -5176,7 +5232,7 @@ SELECT Id_Table, Numero_Table, Capacite_Table, Id_Emplacement FROM Tables WHERE 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(int Numero_Table, global::System.Nullable<int> Capacite_Table, int Id_Emplacement) {
+        public virtual int Insert(int Numero_Table, global::System.Nullable<int> Capacite_Table, int Id_Emplacement, global::System.Nullable<bool> Est_Occupee) {
             this.Adapter.InsertCommand.Parameters[0].Value = ((int)(Numero_Table));
             if ((Capacite_Table.HasValue == true)) {
                 this.Adapter.InsertCommand.Parameters[1].Value = ((int)(Capacite_Table.Value));
@@ -5185,6 +5241,12 @@ SELECT Id_Table, Numero_Table, Capacite_Table, Id_Emplacement FROM Tables WHERE 
                 this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
             }
             this.Adapter.InsertCommand.Parameters[2].Value = ((int)(Id_Emplacement));
+            if ((Est_Occupee.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((bool)(Est_Occupee.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -5205,7 +5267,7 @@ SELECT Id_Table, Numero_Table, Capacite_Table, Id_Emplacement FROM Tables WHERE 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int Numero_Table, global::System.Nullable<int> Capacite_Table, int Id_Emplacement, int Original_Id_Table, int Original_Numero_Table, global::System.Nullable<int> Original_Capacite_Table, int Original_Id_Emplacement, int Id_Table) {
+        public virtual int Update(int Numero_Table, global::System.Nullable<int> Capacite_Table, int Id_Emplacement, global::System.Nullable<bool> Est_Occupee, int Original_Id_Table, int Original_Numero_Table, global::System.Nullable<int> Original_Capacite_Table, int Original_Id_Emplacement, global::System.Nullable<bool> Original_Est_Occupee, int Id_Table) {
             this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(Numero_Table));
             if ((Capacite_Table.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(Capacite_Table.Value));
@@ -5214,18 +5276,32 @@ SELECT Id_Table, Numero_Table, Capacite_Table, Id_Emplacement FROM Tables WHERE 
                 this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
             }
             this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(Id_Emplacement));
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(Original_Id_Table));
-            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Original_Numero_Table));
-            if ((Original_Capacite_Table.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Original_Capacite_Table.Value));
+            if ((Est_Occupee.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((bool)(Est_Occupee.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(Original_Id_Emplacement));
-            this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(Id_Table));
+            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Original_Id_Table));
+            this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_Numero_Table));
+            if ((Original_Capacite_Table.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(Original_Capacite_Table.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(Original_Id_Emplacement));
+            if ((Original_Est_Occupee.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((bool)(Original_Est_Occupee.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(Id_Table));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -5246,8 +5322,8 @@ SELECT Id_Table, Numero_Table, Capacite_Table, Id_Emplacement FROM Tables WHERE 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int Numero_Table, global::System.Nullable<int> Capacite_Table, int Id_Emplacement, int Original_Id_Table, int Original_Numero_Table, global::System.Nullable<int> Original_Capacite_Table, int Original_Id_Emplacement) {
-            return this.Update(Numero_Table, Capacite_Table, Id_Emplacement, Original_Id_Table, Original_Numero_Table, Original_Capacite_Table, Original_Id_Emplacement, Original_Id_Table);
+        public virtual int Update(int Numero_Table, global::System.Nullable<int> Capacite_Table, int Id_Emplacement, global::System.Nullable<bool> Est_Occupee, int Original_Id_Table, int Original_Numero_Table, global::System.Nullable<int> Original_Capacite_Table, int Original_Id_Emplacement, global::System.Nullable<bool> Original_Est_Occupee) {
+            return this.Update(Numero_Table, Capacite_Table, Id_Emplacement, Est_Occupee, Original_Id_Table, Original_Numero_Table, Original_Capacite_Table, Original_Id_Emplacement, Original_Est_Occupee, Original_Id_Table);
         }
     }
     

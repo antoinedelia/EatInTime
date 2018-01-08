@@ -72,6 +72,9 @@
     <Compile Include="DAL\sysdiagrams.cs" />
     <Compile Include="DAL\Tables.cs" />
     <Compile Include="DAL\Type_Plat.cs" />
+    <Compile Include="EatInTimeDataSet.cs">
+      <DependentUpon>EatInTimeDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="EatInTimeDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
