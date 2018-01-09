@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace EatInTimeClient.Helpers
+namespace EatInTimeAdmin.Helpers
 {
     public class RelayCommand : ICommand
     {
@@ -32,7 +32,7 @@ namespace EatInTimeClient.Helpers
         #endregion // Constructors
 
         #region ICommand Members
-        
+
         public bool CanExecute(object parameter)
         {
             return _canExecute == null ? true : _canExecute(parameter);
