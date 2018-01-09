@@ -5,9 +5,9 @@ namespace EatInTimeAdmin
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
 
-    public partial class EatInTimeModel : DbContext
+    public partial class EatInTimeContext : DbContext
     {
-        public EatInTimeModel()
+        public EatInTimeContext()
             : base("name=EatInTimeDataModel")
         {
         }

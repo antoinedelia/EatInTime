@@ -34,5 +34,11 @@ namespace EatInTimeAdmin
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ingredient> Ingredient { get; set; }
+
+        [NotMapped]
+        public string TypePlat { get; set; }
+        [NotMapped]
+        public string Test { get; set; }
+
     }
 }
