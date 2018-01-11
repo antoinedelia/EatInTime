@@ -8,7 +8,7 @@ namespace EatInTimeAdmin
     public partial class EatInTimeContext : DbContext
     {
         public EatInTimeContext()
-            : base("name=EatInTimeDataModel")
+            : base("name=EatInTimeContext")
         {
         }
 

@@ -25,6 +25,8 @@ namespace EatInTimeAdmin
 
         public bool? Est_Occupee { get; set; }
 
+        public bool? Alerte { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Commande> Commande { get; set; }
 

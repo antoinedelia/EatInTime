@@ -12,12 +12,57 @@
     </Window.DataContext>
     <Grid>
         <TabControl x:Name="AdminTabControl">
-            <TabItem x:Name="ManageDishes">
-                <DataGrid x:Name="DishesDataGrid" ItemsSource="{Binding Commande}" >
+            <TabItem x:Name="ManageDishes" Header="Plats">
+                <DataGrid x:Name="DishesDataGrid" ItemsSource="{Binding Dishes}" >
                 </DataGrid>
             </TabItem>
-            <TabItem x:Name="ManageTables">
-                
+            <TabItem x:Name="ManageTables" Header="Tables">
+                <!--<DataGrid ItemsSource="{Binding TablesToCheck}">
+                    
+                </DataGrid>-->
+                <ItemsControl ItemsSource="{Binding TablesToCheck}">
+                    <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <Canvas/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemContainerStyle>
+                            <Style TargetType="ContentPresenter">
+                                <Setter Property="Canvas.Left" Value="{Binding Alerte}"/>
+                                
+                    <Setter Property="Canvas.Top" Value="{Binding Alerte}"/>
+                    
+                            </Style>
+                        </ItemsControl.ItemContainerStyle>
+                    <ItemsControl.ItemTemplate>
+                        <!--<DataTemplate>
+                            <DataGrid>
+                                <DataGridTextColumn Binding="{Binding TablesToCheck}">
+                                    <DataGridTextColumn.CellStyle>
+                                        <Style TargetType="DataGridCell">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding }" Value="Modify">
+                                                    <Setter Property="Background" Value="Green" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </DataGridTextColumn.CellStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Binding="{Binding Numero_Table}" Header="Numero de table"/>
+                                <DataGridTextColumn Binding="{Binding Alerte}" Header="Alerte"/>
+                            </DataGrid>
+                            <StackPanel Orientation="Horizontal">
+                                <Canvas DataContext="{Binding TablesToCheck}">
+                                    <Ellipse Fill="{Binding RowColor}" Width="50" Height="50" >
+
+                                    </Ellipse>
+                                </Canvas>
+                            </StackPanel>
+                        </DataTemplate>-->
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <!--<DataGrid ItemsSource="{Binding TablesToCheck}"></DataGrid>-->
+
             </TabItem>
         </TabControl>
     </Grid>
