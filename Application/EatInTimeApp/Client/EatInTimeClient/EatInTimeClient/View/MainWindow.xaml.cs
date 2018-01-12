@@ -19,6 +19,13 @@ namespace EatInTimeClient.View
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            
+        }
+
+        private void Window_Closing_1(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            ViewModel.ViewModelOrder vm = new ViewModel.ViewModelOrder("osef");
+            vm.DoCloseWindow();
         }
     }
 }

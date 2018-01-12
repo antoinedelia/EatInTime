@@ -5,6 +5,7 @@ namespace EatInTimeAdmin
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Drawing;
 
     public partial class Tables
     {
@@ -31,5 +32,12 @@ namespace EatInTimeAdmin
         public virtual ICollection<Commande> Commande { get; set; }
 
         public virtual Emplacement Emplacement { get; set; }
+
+        [NotMapped]
+        public int XPos { get; set; }
+        [NotMapped]
+        public int YPos { get; set; }
+        [NotMapped]
+        public System.Windows.Media.SolidColorBrush Couleur { get; set; }
     }
 }

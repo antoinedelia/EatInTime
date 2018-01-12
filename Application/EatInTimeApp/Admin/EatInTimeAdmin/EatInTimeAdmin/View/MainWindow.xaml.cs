@@ -23,6 +23,17 @@ namespace EatInTimeAdmin
         public MainWindow()
         {
             InitializeComponent();
+
+            FillItemControl();
+        }
+
+        private void FillItemControl()
+        {
+            //foreach(Tables item in TablesToCheck)
+            //{
+
+            //}
+            //TablesToCheckItemControl.
         }
     }
 }

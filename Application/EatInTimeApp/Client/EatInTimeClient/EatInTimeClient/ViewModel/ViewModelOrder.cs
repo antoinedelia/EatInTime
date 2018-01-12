@@ -25,8 +25,12 @@ namespace EatInTimeClient.ViewModel
         //{
         //    DoCloseWindow();
         //}
-
-        Tables CurrentTable;
+        private Tables _currentTable;
+        public Tables CurrentTable
+        {
+            get { return _currentTable; }
+            set { _currentTable = value; }
+        }
         private ObservableCollection<Avancement> Avancements;
         #endregion
         #region Accessors
@@ -38,8 +42,8 @@ namespace EatInTimeClient.ViewModel
         {
             get; set;
         }
-
         
+        public bool isVisible;
 
         private ObservableCollection<Plat> _Dishes;
         public ObservableCollection<Plat> Dishes
@@ -132,6 +136,18 @@ namespace EatInTimeClient.ViewModel
         //        return _CloseWindowCommand;
         //    }
         //}
+        private RelayCommand _callServerCommand;
+        public RelayCommand CallServerCommand
+        {
+            get
+            {
+                if(_callServerCommand == null)
+                {
+                    _callServerCommand = new RelayCommand<object>(DoCallServer);
+                }
+                return _callServerCommand;
+            }
+        }
 
         private RelayCommand _validateCommand;
         public RelayCommand ValidateCommand
@@ -227,24 +243,48 @@ namespace EatInTimeClient.ViewModel
                 Drinks = new ObservableCollection<Plat>(AllDishes.Where(n => n.Type_Plat.Nom_Type_Plat == "Boisson"));
 
                 //Table Management, working
-                //AllTables = new ObservableCollection<Tables>(db.Tables);
-                //if(CurrentTable == null && AllTables.Any(n => n.Est_Occupee == false))
-                //{
-                //    CurrentTable = AllTables.Where(n => n.Est_Occupee == false).First();
-                //    CurrentTable.Est_Occupee = true;
-                //    TableNumber = db.Tables.First().Numero_Table;
-                //    db.Entry(CurrentTable).State = System.Data.Entity.EntityState.Modified;
-                //    db.SaveChanges();
-                //}
+                AllTables = new ObservableCollection<Tables>(db.Tables);
+                if (CurrentTable == null && AllTables.Any(n => n.Est_Occupee == false))
+                {
+                    //CurrentTable = AllTables.Where(n => n.Est_Occupee == false).First();
+                    CurrentTable = AllTables[0];
+                    CurrentTable.Est_Occupee = true;
+                    TableNumber = AllTables[0].Numero_Table;
+                    //CurrentTable.Numero_Table = TableNumber;
+                    db.Entry(CurrentTable).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
+                }
+                //CurrentTable = new Tables();
+               
             }
         }
 
+        public ViewModelOrder(string osef)
+        {
+
+        }
+
         #region DoMethods
-        private void DoCloseWindow()
+
+        private void DoCallServer(object obj)
         {
             using (var db = new EatInTimeContext())
             {
+                CurrentTable.Alerte = true;
+                db.Entry(CurrentTable).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+            }
+            View.UserControlOrdering.ResolvedButton 
+        }
+
+        public void DoCloseWindow()
+        {
+            using (var db = new EatInTimeContext())
+            {
+                AllTables = new ObservableCollection<Tables>(db.Tables);
+                CurrentTable = AllTables[0];
                 CurrentTable.Est_Occupee = false;
+                CurrentTable.Alerte = false;
                 db.Entry(CurrentTable).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
             }
@@ -309,7 +349,7 @@ namespace EatInTimeClient.ViewModel
         {
             Command = new Commande();
             
-            //Command.Id_Table = CurrentTable.Numero_Table; //Table management, working
+            Command.Id_Table = CurrentTable.Numero_Table; //Table management, working
             
             try
             {
