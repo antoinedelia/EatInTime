@@ -26,6 +26,9 @@ namespace EatInTimeClient.DAL
 
         public int Id_Type_Plat { get; set; }
 
+        [StringLength(100)]
+        public string Chemin_Image { get; set; }
+
         public virtual Type_Plat Type_Plat { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

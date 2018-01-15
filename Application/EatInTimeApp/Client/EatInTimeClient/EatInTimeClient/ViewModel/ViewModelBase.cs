@@ -4,8 +4,7 @@ namespace EatInTimeClient.ViewModel
 {
     public class ViewModelBase : INotifyPropertyChanged
     {
-        //public event PropertyChangedEventHandler PropertyChanged;
-internal void RaisePropertyChanged(string property)
+        internal void RaisePropertyChanged(string property)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }

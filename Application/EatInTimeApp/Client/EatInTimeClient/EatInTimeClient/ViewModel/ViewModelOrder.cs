@@ -274,7 +274,7 @@ namespace EatInTimeClient.ViewModel
                 db.Entry(CurrentTable).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
             }
-            View.UserControlOrdering.ResolvedButton 
+            //View.UserControlOrdering.ResolvedButton 
         }
 
         public void DoCloseWindow()
@@ -285,16 +285,34 @@ namespace EatInTimeClient.ViewModel
                 CurrentTable = AllTables[0];
                 CurrentTable.Est_Occupee = false;
                 CurrentTable.Alerte = false;
-                db.Entry(CurrentTable).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
+                Commande cmd = CurrentTable.Commande.Where(n => n.Id_Avancement != 4).FirstOrDefault();
+                if(cmd != null)
+                {
+                    CurrentTable.Commande.Where(n => n.Id_Avancement != 4).FirstOrDefault().Id_Avancement = 4;
+                    db.Entry(CurrentTable).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
+                }
             }
         }
 
         private void DoSearchDish(object obj)
         {
             string search = obj.ToString();
-
-            Dishes = new ObservableCollection<Plat>(AllDishes.Where(n => n.Nom_Plat.Contains(search)));
+            if (search == "")
+            {
+                Dishes = new ObservableCollection<Plat>(AllDishes.Where(n => n.Type_Plat.Nom_Type_Plat == "Plat"));
+                Entrees = new ObservableCollection<Plat>(AllDishes.Where(n => n.Type_Plat.Nom_Type_Plat == "Entrée"));
+                Desserts = new ObservableCollection<Plat>(AllDishes.Where(n => n.Type_Plat.Nom_Type_Plat == "Dessert"));
+                Drinks = new ObservableCollection<Plat>(AllDishes.Where(n => n.Type_Plat.Nom_Type_Plat == "Boisson"));
+            }
+            else
+            {
+                Dishes = new ObservableCollection<Plat>(AllDishes.Where(n => n.Nom_Plat.Contains(search) && n.Type_Plat.Nom_Type_Plat == "Plat"));
+                Entrees = new ObservableCollection<Plat>(AllDishes.Where(n => n.Nom_Plat.Contains(search) && n.Type_Plat.Nom_Type_Plat == "Entrée"));
+                Desserts = new ObservableCollection<Plat>(AllDishes.Where(n => n.Nom_Plat.Contains(search) && n.Type_Plat.Nom_Type_Plat == "Dessert"));
+                Drinks = new ObservableCollection<Plat>(AllDishes.Where(n => n.Nom_Plat.Contains(search) && n.Type_Plat.Nom_Type_Plat == "Boisson"));
+            }
+            //Dishes = new ObservableCollection<Plat>(AllDishes.Where(n => n.Nom_Plat.Contains(search)));
         }
 
         private void DoAddEntree(object obj)
@@ -347,6 +365,8 @@ namespace EatInTimeClient.ViewModel
 
         private void DoValidateCommand(object obj)
         {
+            //ObservableCollection<Commande> temp = new List<Commande>(Order.Where(n => n.Commande.Where(m => m.Id_Avancement != 4).FirstOrDefault()));
+            //Command = ;
             Command = new Commande();
             
             Command.Id_Table = CurrentTable.Numero_Table; //Table management, working

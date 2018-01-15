@@ -19,9 +19,9 @@
             <ColumnDefinition Width="303*"/>-->
 
         </Grid.ColumnDefinitions>
-        <views:UserControlOrdering x:Name="OrderDishesControl" Loaded="OrderDishesControl_Loaded" Margin="10,10,10,111" Width="1174" Grid.ColumnSpan="5" />
+        <views:UserControlOrdering x:Name="OrderDishesControl" Loaded="OrderDishesControl_Loaded" Margin="10,10,10,123" Width="1174" />
         <Button Content="Appeler un serveur" HorizontalAlignment="Left" Margin="33,722,0,0" VerticalAlignment="Top" Width="221" Height="62" FontSize="24" Grid.ColumnSpan="3" Command="{Binding CallServerCommand}"/>
-        <Button x:Name="ResolvedButton" Content="Probleme résolu" HorizontalAlignment="Left" Margin="285,722,0,0" VerticalAlignment="Top" Width="221" Height="62" FontSize="24" Visibility="{Binding isVisible, Mode=TwoWay, Converter={StaticResource Converter}}" Command="{Binding CallServerCommand}"/>
+        <!--<Button x:Name="ResolvedButton" Content="Probleme résolu" HorizontalAlignment="Left" Margin="285,722,0,0" VerticalAlignment="Top" Width="221" Height="62" FontSize="24" Visibility="{Binding isVisible, Mode=TwoWay, Converter={StaticResource Converter}}" Command="{Binding CallServerCommand}"/>-->
         <Button Content="Commander" HorizontalAlignment="Left" Margin="932,722,0,0" VerticalAlignment="Top" Width="221" Height="62" FontSize="24" Command="{Binding ValidateCommand}"/>
     </Grid>
     <!--WindowStartupLocation="CenterScreen" WindowState="Maximized"-->

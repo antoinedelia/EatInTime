@@ -21,11 +21,11 @@
                 <ColumnDefinition Width="66*"/>
                 <ColumnDefinition Width="19*"/>
             </Grid.ColumnDefinitions>
-            <TabControl x:Name="DishesTabControl" HorizontalAlignment="Left" Height="636" Margin="0,0,0,00" VerticalAlignment="Top" Width="848" Grid.Row="1">
-                <TabItem x:Name="MenuTab" Header="Menus">
-                </TabItem>
+            <TabControl x:Name="DishesTabControl" HorizontalAlignment="Left" Margin="0,0,0,28" Width="848" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
+                <!--<TabItem x:Name="MenuTab" Header="Menus">
+                </TabItem>-->
                 <TabItem x:Name="EntreesTab" Header="Entrées">
-                    <ItemsControl Name="EntreesItemsControl" ItemsSource="{Binding Entrees}" AlternationCount="100">
+                    <ItemsControl Name="EntreesItemsControl" ItemsSource="{Binding Entrees}" AlternationCount="100" Margin="0,0,0,4">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
@@ -34,30 +34,35 @@
                                             <ColumnDefinition/>
                                             <ColumnDefinition/>
                                             <ColumnDefinition/>
+                                            <ColumnDefinition/>
                                         </Grid.ColumnDefinitions>
                                         <Grid.RowDefinitions>
                                             <RowDefinition/>
                                             <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
                                         </Grid.RowDefinitions>
-                                        <!--<Button x:Name="AddEntreeButton" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Content="Commander" >--><!--Command="{Binding AddEntreeToCommand}" CommandParameter="{Binding Path=(ItemsControl.AlternationIndex),RelativeSource={RelativeSource TemplatedParent}}"-->
-                                            <!--<Button.DataContext>
+                                        <!--<Button x:Name="AddEntreeButton" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Content="Commander" >-->
+                                        <!--Command="{Binding AddEntreeToCommand}" CommandParameter="{Binding Path=(ItemsControl.AlternationIndex),RelativeSource={RelativeSource TemplatedParent}}"-->
+                                        <!--<Button.DataContext>
                                                 <viewn:ViewModelOrder/>
                                             </Button.DataContext>-->
-                                        <Button Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Content="Commander" Command="{Binding AddEntreeToCommand}"
+                                        <Button Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Content="Commander" Command="{Binding AddEntreeToCommand}"
                                                 CommandParameter="{Binding Path=(ItemsControl.AlternationIndex),RelativeSource={RelativeSource TemplatedParent}}"
-                                               DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext}">
-                                        </Button>
-                                        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Nom_Plat}" FontSize="10"/>
-                                        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding String_Ingredients}" FontSize="10" />
+                                               DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext}" MinWidth="100" FontSize="18" FontWeight="Normal"/>
+                                        <Image Margin="10" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Source="{Binding Chemin_Image}" MaxHeight="100" MaxWidth="150" />
 
-                                        <TextBox Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" Text="{Binding Prix_Plat, StringFormat=' {0} €'}" FontSize="10"/>
+                                        <TextBox Margin="10" Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" Text="{Binding Nom_Plat}" FontSize="15" BorderThickness="0"/>
+                                        <TextBox Margin="10" Grid.Column="2" Grid.Row="2" Grid.RowSpan="2" Text="{Binding String_Ingredients}" FontSize="15" BorderThickness="0" FontFamily="Segoe UI"/>
+
+                                        <TextBox Margin="10" Grid.Row="1" Grid.RowSpan="4" Grid.Column="3" Text="{Binding Prix_Plat, StringFormat=' {0} €'}" FontSize="15" BorderThickness="0" TextDecorations="Underline" FontFamily="Segoe UI"/>
                                     </Grid>
                                 </StackPanel>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                 </TabItem>
-                <TabItem x:Name="PlatTab" Header="Plats">
+                <TabItem x:Name="PlatTab" Header="Plats" ScrollViewer.HorizontalScrollBarVisibility="Visible">
                     <ItemsControl Name="DishesItemsControl" ItemsSource="{Binding Dishes}" AlternationCount="100">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
@@ -67,24 +72,30 @@
                                             <ColumnDefinition/>
                                             <ColumnDefinition/>
                                             <ColumnDefinition/>
+                                            <ColumnDefinition/>
                                         </Grid.ColumnDefinitions>
                                         <Grid.RowDefinitions>
                                             <RowDefinition/>
                                             <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
                                         </Grid.RowDefinitions>
-                                        <Button Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Content="Commander" Command="{Binding AddDishToCommand}"
+                                        <Button Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Content="Commander" Command="{Binding AddDishToCommand}"
                                                 CommandParameter="{Binding Path=(ItemsControl.AlternationIndex),RelativeSource={RelativeSource TemplatedParent}}"
-                                               DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext}">
+                                               DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext}" MinWidth="100">
                                         </Button>
-                                        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Nom_Plat}" FontSize="10"/>
-                                        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding String_Ingredients}" FontSize="10" />
-                                        
-                                        <TextBox Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" Text="{Binding Prix_Plat, StringFormat=' {0} €'}" FontSize="10"/>
+                                        <Image Margin="10" Grid.Column="1" Grid.RowSpan="4" Source="{Binding Chemin_Image}" MaxHeight="100" MaxWidth="150" />
+
+                                        <TextBox Margin="10" Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" Text="{Binding Nom_Plat}" FontSize="15" BorderThickness="0"/>
+                                        <TextBox Margin="10" Grid.Column="2" Grid.Row="2" Grid.RowSpan="2" Text="{Binding String_Ingredients}" FontSize="15" BorderThickness="0" />
+
+                                        <TextBox Margin="10" Grid.Row="1" Grid.RowSpan="4" Grid.Column="3" Text="{Binding Prix_Plat, StringFormat=' {0} €'}" FontSize="15" BorderThickness="0"/>
                                     </Grid>
                                 </StackPanel>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
+                    <!--#region -->
                     <!--<Grid Background="#FFE5E5E5">
                         -->
                     <!--<Grid.ColumnDefinitions>
@@ -111,6 +122,7 @@
                     <!--<DataGrid HorizontalAlignment="Left" Height="588" Margin="10,10,0,0" VerticalAlignment="Top" Width="822" Grid.ColumnSpan="1" />-->
                     <!--
                     </Grid>-->
+                    <!--#endregion-->
                 </TabItem>
                 <TabItem x:Name="DessertTab" Header="Desserts">
                     <ItemsControl Name="DessertsItemsControl" ItemsSource="{Binding Desserts}" AlternationCount="100">
@@ -122,18 +134,23 @@
                                             <ColumnDefinition/>
                                             <ColumnDefinition/>
                                             <ColumnDefinition/>
+                                            <ColumnDefinition/>
                                         </Grid.ColumnDefinitions>
                                         <Grid.RowDefinitions>
                                             <RowDefinition/>
                                             <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
                                         </Grid.RowDefinitions>
-                                        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Nom_Plat}" FontSize="10"/>
-                                        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding String_Ingredients}" FontSize="10" />
-                                        <Button Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Content="Commander" Command="{Binding AddDessertToCommand}"
+                                        <TextBox Margin="10" Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" Text="{Binding Nom_Plat}" FontSize="15" BorderThickness="0"/>
+                                        <TextBox Margin="10" Grid.Column="2" Grid.Row="2" Grid.RowSpan="2" Text="{Binding String_Ingredients}" FontSize="15" BorderThickness="0"/>
+                                        <Button Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Content="Commander" Command="{Binding AddDessertToCommand}"
                                                 CommandParameter="{Binding Path=(ItemsControl.AlternationIndex),RelativeSource={RelativeSource TemplatedParent}}"
-                                               DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext}">
+                                               DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext}" MinWidth="100">
                                         </Button>
-                                        <TextBox Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" Text="{Binding Prix_Plat, StringFormat=' {0} €'}" FontSize="10"/>
+                                        <Image Margin="10" Grid.Column="1" Grid.RowSpan="4" Source="{Binding Chemin_Image}" MaxHeight="100" MaxWidth="150" />
+
+                                        <TextBox Margin="10" Grid.Row="1" Grid.RowSpan="4" Grid.Column="3" Text="{Binding Prix_Plat, StringFormat=' {0} €'}" FontSize="10" BorderThickness="0"/>
                                     </Grid>
                                 </StackPanel>
                             </DataTemplate>
@@ -150,18 +167,25 @@
                                             <ColumnDefinition/>
                                             <ColumnDefinition/>
                                             <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
                                         </Grid.ColumnDefinitions>
                                         <Grid.RowDefinitions>
                                             <RowDefinition/>
                                             <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
                                         </Grid.RowDefinitions>
-                                        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Nom_Plat}" FontSize="10"/>
-                                        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding String_Ingredients}" FontSize="10" />
-                                        <Button Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Content="Commander" Command="{Binding AddDrinkToCommand}"
+                                        <Image Margin="10" Grid.Column="1" Grid.RowSpan="4" Source="{Binding Chemin_Image}" MaxHeight="100" MaxWidth="150" />
+
+                                        <TextBox Margin="10" Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" Text="{Binding Nom_Plat}" FontSize="15" BorderThickness="0"/>
+                                        <TextBox Margin="10" Grid.Column="2" Grid.Row="2" Grid.RowSpan="2" Text="{Binding String_Ingredients}" FontSize="15" BorderThickness="0"/>
+                                        <Button Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Content="Commander" Command="{Binding AddDrinkToCommand}"
                                                 CommandParameter="{Binding Path=(ItemsControl.AlternationIndex),RelativeSource={RelativeSource TemplatedParent}}"
-                                               DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext}">
+                                               DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext}" MinWidth="100">
                                         </Button>
-                                        <TextBox Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" Text="{Binding Prix_Plat, StringFormat=' {0} €'}" FontSize="10"/>
+                                        <TextBox Margin="10" Grid.Row="0" Grid.Column="4" Text="" />
+                                        <TextBox Margin="10" Grid.Row="1" Grid.RowSpan="4" Grid.Column="3" Text="{Binding Prix_Plat, StringFormat=' {0} €'}" FontSize="15" BorderThickness="0"/>
                                     </Grid>
                                 </StackPanel>
                             </DataTemplate>
@@ -178,17 +202,18 @@
                 </TabItem>
             </TabControl>
             <TextBox x:Name="SearchDishTextBox" HorizontalAlignment="Left" Height="23" Margin="10,7,0,0" TextWrapping="Wrap" Text="{Binding SearchString, Mode=OneWayToSource}" VerticalAlignment="Top" Width="370" GotFocus="SearchDishTextBox_GotFocus" />
-            <Button x:Name="SearchButton" Content="Rechercher" HorizontalAlignment="Left" Margin="390,7,0,0" VerticalAlignment="Top" Width="142" Height="23" Click="SearchButton_Click" Command="{Binding SearchDish}" CommandParameter="{Binding }" /> <!--CommandParameter="{Binding Text, ElementName=SearchDishTextBox}"-->
-            <ListView x:Name="CommandListView" Grid.Column="1" HorizontalAlignment="Left" Height="636" Margin="10,1,0,0" VerticalAlignment="Top" Width="230" Grid.Row="1" IsEnabled="True" ItemsSource="{Binding Path=Order, UpdateSourceTrigger=PropertyChanged}" >
+            <Button x:Name="SearchButton" Content="Rechercher" HorizontalAlignment="Left" Margin="390,7,0,0" VerticalAlignment="Top" Width="142" Height="23" Click="SearchButton_Click" Command="{Binding SearchDish}" CommandParameter="{Binding Text, ElementName=SearchDishTextBox}" />
+            <!--CommandParameter="{Binding Text, ElementName=SearchDishTextBox}"-->
+            <ListView x:Name="CommandListView" Grid.Column="1" HorizontalAlignment="Left" Height="583" Margin="10,1,-16,0" VerticalAlignment="Top" Width="230" Grid.Row="1" IsEnabled="True" ItemsSource="{Binding Path=Order, UpdateSourceTrigger=PropertyChanged}" UseLayoutRounding="True" FontSize="15" >
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Plat" DisplayMemberBinding="{Binding Nom_Plat}"/>
-                        <GridViewColumn Header="Prix" DisplayMemberBinding="{Binding Prix_Plat}" />
+                        <GridViewColumn Header="Plat" DisplayMemberBinding="{Binding Nom_Plat}" Width="160"/>
+                        <GridViewColumn Header="Prix" DisplayMemberBinding="{Binding Prix_Plat}" Width="70"/>
                     </GridView>
                 </ListView.View>
             </ListView>
             <!--<ListBox x:Name="Command" ItemsSource="{Binding Path=TotalPrice, UpdateSourceTrigger=PropertyChanged}" />-->
-            <TextBox x:Name="PriceTB" Grid.Column="1" Grid.Row="2" Margin="10,0,0,0" HorizontalAlignment="Left" Text="{Binding Path=TotalPrice, StringFormat='Prix total : {0}'}" Width="230" />
+            <TextBox x:Name="PriceTB" Grid.Column="1" Grid.Row="1" Margin="10,589,-16,28" HorizontalAlignment="Left" Text="{Binding Path=TotalPrice, StringFormat='Prix total : {0} €'}" Width="230" Grid.RowSpan="2" FontSize="20" VerticalContentAlignment="Center" TextDecorations="Underline" FontStyle="Italic" />
             <TextBox x:Name="InertCommandTextbox" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" Height="24" Margin="10,0,0,0" Text="Commande" VerticalAlignment="Top" Width="230" TextWrapping="Wrap" IsReadOnly="True" TextAlignment="Center" />
         </Grid>
     </Grid>

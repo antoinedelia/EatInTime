@@ -7,55 +7,55 @@
 <DiagramLayout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ex:showrelationlabel="False" ViewPortX="60" ViewPortY="-47" xmlns:ex="urn:schemas-microsoft-com:xml-msdatasource-layout-extended" xmlns="urn:schemas-microsoft-com:xml-msdatasource-layout">
   <Shapes>
     <Shape ID="DesignTable:Avancement" ZOrder="11" X="351" Y="70" Height="115" Width="217" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="64" />
-    <Shape ID="DesignTable:Commande" ZOrder="10" X="70" Y="70" Height="153" Width="211" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="102" />
+    <Shape ID="DesignTable:Commande" ZOrder="10" X="71" Y="66" Height="153" Width="211" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="102" />
     <Shape ID="DesignTable:Emplacement" ZOrder="9" X="603" Y="255" Height="115" Width="223" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="64" />
     <Shape ID="DesignTable:Ingredient" ZOrder="8" X="896" Y="70" Height="153" Width="205" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="102" />
-    <Shape ID="DesignTable:Plat" ZOrder="7" X="1171" Y="70" Height="153" Width="167" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="102" />
-    <Shape ID="DesignTable:Tables" ZOrder="6" X="351" Y="255" Height="172" Width="182" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="121" />
-    <Shape ID="DesignTable:Type_Plat" ZOrder="5" X="1408" Y="70" Height="115" Width="200" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="64" />
+    <Shape ID="DesignTable:Plat" ZOrder="2" X="1171" Y="71" Height="172" Width="167" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="24" OldDataTableHeight="24" SplitterPosition="121" />
+    <Shape ID="DesignTable:Tables" ZOrder="1" X="351" Y="255" Height="191" Width="182" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="140" />
+    <Shape ID="DesignTable:Type_Plat" ZOrder="7" X="1408" Y="70" Height="115" Width="200" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="64" />
   </Shapes>
   <Connectors>
-    <Connector ID="DesignRelation:FK_Commande_Id_Avancement" ZOrder="4" LineWidth="11">
+    <Connector ID="DesignRelation:FK_Commande_Id_Avancement" ZOrder="6" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>351</X>
-          <Y>127</Y>
+          <Y>123</Y>
         </Point>
         <Point>
-          <X>281</X>
-          <Y>127</Y>
+          <X>282</X>
+          <Y>123</Y>
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:FK_Commande_Id_Table" ZOrder="3" LineWidth="11">
+    <Connector ID="DesignRelation:FK_Commande_Id_Table" ZOrder="5" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>351</X>
           <Y>272</Y>
         </Point>
         <Point>
-          <X>264</X>
+          <X>265</X>
           <Y>272</Y>
         </Point>
         <Point>
-          <X>264</X>
-          <Y>223</Y>
+          <X>265</X>
+          <Y>219</Y>
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:FK_Plat_Id_Type_Plat" ZOrder="2" LineWidth="11">
+    <Connector ID="DesignRelation:FK_Plat_Id_Type_Plat" ZOrder="4" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>1408</X>
-          <Y>127</Y>
+          <Y>128</Y>
         </Point>
         <Point>
           <X>1338</X>
-          <Y>127</Y>
+          <Y>128</Y>
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:FK_Tables_Id_Emplacement" ZOrder="1" LineWidth="11">
+    <Connector ID="DesignRelation:FK_Tables_Id_Emplacement" ZOrder="3" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>603</X>

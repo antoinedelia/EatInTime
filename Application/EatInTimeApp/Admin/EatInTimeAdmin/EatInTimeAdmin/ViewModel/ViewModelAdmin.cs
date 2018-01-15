@@ -34,18 +34,18 @@ namespace EatInTimeAdmin.ViewModel
         }
 
         private void DbChecking()
-        {
-            while (true)
+        {      
+            while(true)
             {
                 using (var asyncdb = new EatInTimeContext())
                 {
                     AllTables = new AsyncObservableCollection<EatInTimeAdmin.Tables>(asyncdb.Tables);
 
-                    AllTables[0].XPos = 20;
-                    AllTables[0].YPos = 20;
-                    AllTables[1].XPos = 150;
-                    AllTables[1].YPos = 150;
-                    foreach(Tables item in AllTables)
+                    //AllTables[0].XPos = 20;
+                    //AllTables[0].YPos = 20;
+                    //AllTables[1].XPos = 150;
+                    //AllTables[1].YPos = 150;
+                    foreach (Tables item in AllTables)
                     {
                         if (item.Est_Occupee == true)
                             item.Couleur = Brushes.Green;
@@ -65,15 +65,15 @@ namespace EatInTimeAdmin.ViewModel
                                     item.Couleur = Brushes.Red;
                                     number = item.Numero_Table;
                                     List<Commande> tempCom = item.Commande.ToList();
-                                    for(int i = tempCom.Count - 1; i >=0; i--)
+                                    for (int i = tempCom.Count - 1; i >= 0; i--)
                                     {
-                                        if(tempCom[i].Id_Avancement != 2)
+                                        if (tempCom[i].Id_Avancement != 2)
                                         {
                                             tempCom.RemoveAt(i);
                                         }
                                         else
                                         {
-                                            foreach(Plat plat in tempCom[i].Plat)
+                                            foreach (Plat plat in tempCom[i].Plat)
                                             {
                                                 tempCom[i].String_Plats += plat.Nom_Plat + " ,";
                                             }
@@ -85,7 +85,7 @@ namespace EatInTimeAdmin.ViewModel
                                         }
                                     }
                                     item.Commande = tempCom;
-                                    
+
                                     //foreach (Commande com in item.Commande)
                                     //{
                                     //    if (com.Id_Avancement != 2)
@@ -93,7 +93,7 @@ namespace EatInTimeAdmin.ViewModel
                                     //        item.Commande.Remove(com);
                                     //    }
                                     //}
-                                   // MessageBox.Show(string.Format("La table n° {0} Appelle un serveur", number)); 
+                                    // MessageBox.Show(string.Format("La table n° {0} Appelle un serveur", number)); 
                                 }
                                 else
                                 {
@@ -102,7 +102,7 @@ namespace EatInTimeAdmin.ViewModel
                                 //TablesToCheck.Clear();
                                 //TablesToCheck.Add(item);
                             }
-                            
+
                             //foreach (Tables item in AllTables.Where(n => n.Alerte == true))
                             //{
                             //    item.Couleur = Brushes.Red;
@@ -120,6 +120,7 @@ namespace EatInTimeAdmin.ViewModel
 
                     Thread.Sleep(3000);
                     //return Tables.Any(n => n.Alerte == true);
+                    AllTables2 = AllTables;
                 }
             }
         }
@@ -196,10 +197,20 @@ namespace EatInTimeAdmin.ViewModel
             set
             {
                 _AllTables = value;
-                OnPropertyChanged("Tables");
+                OnPropertyChanged("AllTables");
             }
         }
 
+        private ObservableCollection<Tables> _AllTables2;
+        public ObservableCollection<Tables> AllTables2
+        {
+            get { return _AllTables2; }
+            set
+            {
+                _AllTables2 = value;
+                OnPropertyChanged("AllTables2");
+            }
+        }
         private ObservableCollection<Commande> _Commande;
         public ObservableCollection<Commande> Commande
         {
@@ -213,11 +224,15 @@ namespace EatInTimeAdmin.ViewModel
 
         #endregion
 
+        public ObservableCollection<Tables> stockTables { get; set; }
+
         private Thread NotificationCheckThread;
         public ViewModelAdmin()
         {
+            stockTables = new ObservableCollection<Tables>();
             TablesToCheck = new AsyncObservableCollection<Tables>();
             RowColor = Brushes.Blue;
+            AllTables2 = new ObservableCollection<EatInTimeAdmin.Tables>();
             using (db)
             {
                 Dishes = new ObservableCollection<Plat>(db.Plat);

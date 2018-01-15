@@ -21,7 +21,7 @@
                 <!--<DataGrid ItemsSource="{Binding TablesToCheck}">
                     
                 </DataGrid>-->
-                <ItemsControl x:Name="TablesToCheckItemControl"  AlternationCount="100" ItemsSource="{Binding AllTables}">
+                <ItemsControl x:Name="TablesToCheckItemControl"  AlternationCount="100" ItemsSource="{Binding AllTables, UpdateSourceTrigger=PropertyChanged}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
